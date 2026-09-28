@@ -1,0 +1,22 @@
+# Godot 4
+.godot/
+*.translation
+export_credentials.cfg
+*.tmp
+
+# Exporte
+build/
+
+# Portable Godot-Binaries (Pfad steht in tools/godot_path.txt)
+tools/godot*
+!tools/godot_path.txt
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Test-Reports
+reports/
+tests/**/reports/
+addons/gdUnit4/reports/

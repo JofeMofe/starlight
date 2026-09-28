@@ -1,0 +1,17 @@
+{
+  "_doc": "Erste passende Regel gewinnt. grid = Breite/Höhe müssen Vielfache sein. Siehe STYLEGUIDE §Maße.",
+  "rules": [
+    {"name": "Palette",         "glob": "assets/palette/*",               "skip": true},
+    {"name": "Normal Maps",     "glob": "assets/normalmaps/*",            "grid": [1, 1]},
+    {"name": "Tilesets",        "glob": "assets/tilesets/*",              "grid": [32, 32]},
+    {"name": "Portraits",       "glob": "assets/portraits/*",             "grid": [128, 128]},
+    {"name": "Item-Icons",      "glob": "assets/sprites/items/*",         "grid": [32, 32]},
+    {"name": "Klio/Figuren",    "glob": "assets/sprites/characters/*",    "grid": [16, 4]},
+    {"name": "NPCs",            "glob": "assets/sprites/npcs/*",          "grid": [32, 12]},
+    {"name": "Pferde",          "glob": "assets/sprites/animals/horses/*", "grid": [32, 16]},
+    {"name": "Hunde",           "glob": "assets/sprites/animals/dogs/*",  "grid": [16, 8]},
+    {"name": "Effekte",         "glob": "assets/sprites/fx/*",            "grid": [8, 8]},
+    {"name": "UI",              "glob": "assets/sprites/ui/*",            "grid": [8, 8]},
+    {"name": "Fonts",           "glob": "assets/fonts/*",                 "grid": [1, 1]}
+  ]
+}

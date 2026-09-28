@@ -1,0 +1,6 @@
+# Glob-Muster (relativ zum Projektordner) für PNGs, die NICHT gegen die
+# Master-Palette geprüft werden. Jede Ausnahme braucht eine Begründung.
+assets/normalmaps/*          # Normal Maps kodieren Richtungen, keine Farben
+assets/sprites/fx/light_*    # Lichttexturen für PointLight2D (weiche Verläufe)
+assets/sprites/**/mask_*     # Graustufen-/Indexmasken für Palette-Swap
+assets/sprites/ui/overlay_*  # UI-Transparenzen (Abdunkler, Vignetten)

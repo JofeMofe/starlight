@@ -1,0 +1,9 @@
+pfad,typ,quelle_url,autor,lizenz,lizenz_url,abruf_datum,modifiziert,notiz
+assets/palette/starlight.hex,palette,tools/pipeline/generators/gen_palette.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"Master-Palette, 64 Farben"
+assets/palette/starlight_strip.png,palette,tools/pipeline/generators/gen_palette.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,64x1-Lookup für Shader
+assets/palette/starlight_swatch.png,palette,tools/pipeline/generators/gen_palette.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"Swatch, eine Zeile pro Rampe"
+assets/sprites/fx/sparkle_16.png,sprite,tools/pipeline/generators/gen_m0_placeholders.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Funkelstern 16x16
+assets/sprites/ui/icon.ico,icon,tools/pipeline/generators/gen_m0_placeholders.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Windows-Icon 16-256 px
+assets/sprites/ui/icon_256.png,icon,tools/pipeline/generators/gen_m0_placeholders.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,App-Icon x8 Nearest
+assets/sprites/ui/icon_32.png,icon,tools/pipeline/generators/gen_m0_placeholders.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,App-Icon 32x32 (Quelle)
+assets/tilesets/mooswiesen/placeholder_grass.png,tileset,tools/pipeline/generators/gen_m0_placeholders.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,M0-Platzhalter Gras 32x32
