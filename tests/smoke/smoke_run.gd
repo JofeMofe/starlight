@@ -18,7 +18,18 @@ var _failures: PackedStringArray = []
 
 func _ready() -> void:
 	SaveManager.save_root = SMOKE_SAVE_ROOT
-	_run.call_deferred()
+	_detach_from_scene.call_deferred()
+
+
+## Der Bot ist anfangs selbst die aktuelle Szene und würde beim ersten
+## Szenenwechsel freigegeben. Ein Platzhalter übernimmt die Rolle der
+## aktuellen Szene; der Bot bleibt als eigenständiger Knoten unter root.
+func _detach_from_scene() -> void:
+	var placeholder: Node = Node.new()
+	placeholder.name = "SmokePlaceholder"
+	get_tree().root.add_child(placeholder)
+	get_tree().current_scene = placeholder
+	_run()
 
 
 func _run() -> void:
@@ -74,14 +85,22 @@ func _run() -> void:
 
 func _check_autosave_roundtrip() -> void:
 	_expect(SaveManager.has_save(SaveManager.AUTOSAVE_SLOT), "kein Autosave nach dem Schlafen")
-	var expected: String = JSON.stringify(SaveManager.collect_state(), "", true)
+	# Die Uhr läuft zwischen Autosave und Prüfung weiter, daher wird gegen den
+	# Dateiinhalt verglichen: Laden -> erneut sammeln muss ihn exakt ergeben.
+	TimeManager.running = false
+	var saved: Dictionary = SaveManager.read_save(SaveManager.AUTOSAVE_SLOT)
 	GameState.reset()
 	TimeManager.start_new_game()
 	var err: Error = SaveManager.load_game(SaveManager.AUTOSAVE_SLOT)
 	_expect(err == OK, "Autosave nicht ladbar: %s" % error_string(err))
-	var actual: String = JSON.stringify(SaveManager.collect_state(), "", true)
-	# play_time_seconds läuft zwischen Speichern und Vergleich weiter -> ausklammern
-	_expect(_strip_play_time(actual) == _strip_play_time(expected), "Autosave-Rundreise weicht ab")
+	var reloaded: Dictionary = JSON.parse_string(JSON.stringify(SaveManager.collect_state())) as Dictionary
+	var expected: String = JSON.stringify(saved, "", true)
+	var actual: String = JSON.stringify(reloaded, "", true)
+	if expected != actual:
+		printerr("[Smoke] erwartet: ", expected)
+		printerr("[Smoke] erhalten: ", actual)
+	_expect(expected == actual, "Autosave-Rundreise weicht ab")
+	TimeManager.running = true
 
 
 func _visit_scene() -> void:
@@ -93,12 +112,6 @@ func _visit_scene() -> void:
 		await get_tree().process_frame
 	_expect(guard < 600, "Szenenwechsel nach %s hängt" % VISIT_SCENE)
 	print("[Smoke] Szene besucht: ", VISIT_SCENE)
-
-
-func _strip_play_time(json_text: String) -> String:
-	var d: Dictionary = JSON.parse_string(json_text) as Dictionary
-	(d["game_state"] as Dictionary).erase("play_time_seconds")
-	return JSON.stringify(d, "", true)
 
 
 func _expect(condition: bool, message: String) -> void:

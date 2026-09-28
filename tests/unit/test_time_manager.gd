@@ -42,6 +42,16 @@ func test_passing_two_am_starts_next_day_later_without_penalty() -> void:
 	assert_int(int(TimeManager.minute_of_day)).is_equal(TimeManager.config.passout_wake_minute)
 
 
+func test_glow_refills_fully_after_sleep_and_partly_after_passout() -> void:
+	var klio: PlayerData = GameState.local_player()
+	klio.glow = 10.0
+	TimeManager.sleep()
+	assert_float(klio.glow).is_equal(klio.max_glow)
+	klio.glow = 10.0
+	TimeManager.advance_minutes(float(TimeManager.config.day_end_minute))
+	assert_float(klio.glow).is_equal_approx(klio.max_glow * TimeManager.config.passout_glow_ratio, 0.001)
+
+
 func test_sleep_starts_next_day_at_day_start() -> void:
 	TimeManager.advance_minutes(600.0)
 	TimeManager.sleep()

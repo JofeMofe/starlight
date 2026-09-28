@@ -72,6 +72,13 @@ func test_settings_defaults_available() -> void:
 	assert_bool(bool(Settings.get_value("accessibility", "relaxed_mode"))).is_false()
 
 
+func test_relaxed_mode_slows_time() -> void:
+	Settings.set_value("accessibility", "relaxed_mode", true)
+	assert_float(TimeManager.time_scale).is_equal(TimeManager.config.relaxed_mode_factor)
+	Settings.set_value("accessibility", "relaxed_mode", false)
+	assert_float(TimeManager.time_scale).is_equal(1.0)
+
+
 func test_localization_placeholders() -> void:
 	Localization.set_locale("de")
 	assert_str(Localization.text("ui.m0.hint", {"key": "F2"})).is_equal("Taste F2: Sprache wechseln")

@@ -19,8 +19,21 @@ func _init() -> void:
 	reset()
 
 
+func _ready() -> void:
+	EventBus.day_started.connect(_on_day_started)
+
+
 func _process(delta: float) -> void:
 	play_time_seconds += delta
+
+
+## Morgens wird der Feenglanz aufgefüllt; nach Einschlafen um 02:00 nur
+## teilweise (sanfte Folge statt Strafe, §4.4).
+func _on_day_started(_day: int, _season: int, _year: int) -> void:
+	var ratio: float = TimeManager.config.passout_glow_ratio if TimeManager.woke_from_passout else 1.0
+	for p: PlayerData in players.values():
+		p.glow = p.max_glow * ratio
+		EventBus.glow_changed.emit(p.player_id, p.glow, p.max_glow)
 
 
 func reset() -> void:

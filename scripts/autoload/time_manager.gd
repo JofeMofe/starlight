@@ -38,6 +38,11 @@ func _init() -> void:
 	minute_of_day = float(config.day_start_minute)
 
 
+func _ready() -> void:
+	EventBus.settings_changed.connect(_on_settings_changed)
+	_apply_relaxed_mode()
+
+
 func _process(delta: float) -> void:
 	if running and not is_paused():
 		advance_minutes(delta * time_scale / config.real_seconds_per_game_minute)
@@ -191,6 +196,18 @@ func _begin_next_day(wake_minute: int, passed_out: bool) -> void:
 	if season_changed:
 		EventBus.season_changed.emit(season, year)
 	EventBus.day_started.emit(day, season, year)
+
+
+## Entspannter Modus (Barrierefreiheit): Zeit läuft langsamer. Die Pause in
+## Innenräumen melden Innenraum-Szenen ab M2 als Pausenquelle an.
+func _apply_relaxed_mode() -> void:
+	var relaxed: bool = bool(Settings.get_value("accessibility", "relaxed_mode"))
+	time_scale = config.relaxed_mode_factor if relaxed else 1.0
+
+
+func _on_settings_changed(section: StringName) -> void:
+	if section == &"accessibility":
+		_apply_relaxed_mode()
 
 
 func _moon_cycle_length() -> int:
