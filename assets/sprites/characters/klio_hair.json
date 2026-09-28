@@ -1,0 +1,65 @@
+{
+  "frame_size": [
+    32,
+    48
+  ],
+  "animations": {
+    "tail_down": {
+      "row": 0,
+      "frames": 5,
+      "durations_ms": [
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": false,
+      "sway": [
+        -2,
+        -1,
+        0,
+        1,
+        2
+      ]
+    },
+    "tail_up": {
+      "row": 1,
+      "frames": 5,
+      "durations_ms": [
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": false,
+      "sway": [
+        -2,
+        -1,
+        0,
+        1,
+        2
+      ]
+    },
+    "tail_side": {
+      "row": 2,
+      "frames": 5,
+      "durations_ms": [
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": false,
+      "sway": [
+        -2,
+        -1,
+        0,
+        1,
+        2
+      ]
+    }
+  }
+}

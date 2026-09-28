@@ -1,11 +1,53 @@
 pfad,typ,quelle_url,autor,lizenz,lizenz_url,abruf_datum,modifiziert,notiz
+assets/audio/sfx/call_dog.ogg,sfx,tools/pipeline/generators/gen_m1_sfx.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Hund rufen
+assets/audio/sfx/dog_bark.ogg,sfx,tools/pipeline/generators/gen_m1_sfx.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"Bellen (Platzhalter, stilisiert)"
+assets/audio/sfx/gait_up.ogg,sfx,tools/pipeline/generators/gen_m1_sfx.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Gangart schneller
+assets/audio/sfx/hoof_grass_1.ogg,sfx,tools/pipeline/generators/gen_m1_sfx.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Huf Gras
+assets/audio/sfx/hoof_grass_2.ogg,sfx,tools/pipeline/generators/gen_m1_sfx.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Huf Gras
+assets/audio/sfx/hoof_grass_3.ogg,sfx,tools/pipeline/generators/gen_m1_sfx.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Huf Gras
+assets/audio/sfx/horse_snort.ogg,sfx,tools/pipeline/generators/gen_m1_sfx.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"Schnauben (Platzhalter, stilisiert)"
+assets/audio/sfx/mount.ogg,sfx,tools/pipeline/generators/gen_m1_sfx.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Auf-/Absteigen
+assets/audio/sfx/pet_happy.ogg,sfx,tools/pipeline/generators/gen_m1_sfx.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Streicheln/Freude
+assets/audio/sfx/ring_hum.ogg,sfx,tools/pipeline/generators/gen_m1_sfx.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Feenring summt
+assets/audio/sfx/step_grass_1.ogg,sfx,tools/pipeline/generators/gen_m1_sfx.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Schritt Gras
+assets/audio/sfx/step_grass_2.ogg,sfx,tools/pipeline/generators/gen_m1_sfx.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Schritt Gras
+assets/audio/sfx/step_grass_3.ogg,sfx,tools/pipeline/generators/gen_m1_sfx.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Schritt Gras
+assets/audio/sfx/transform_blocked.ogg,sfx,tools/pipeline/generators/gen_m1_sfx.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Kein Platz zum Verwandeln
+assets/audio/sfx/transform_to_fairy.ogg,sfx,tools/pipeline/generators/gen_m1_sfx.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Verwandlung zur Fee (hoch)
+assets/audio/sfx/transform_to_human.ogg,sfx,tools/pipeline/generators/gen_m1_sfx.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Verwandlung zum Menschen (tief)
+assets/audio/sfx/whistle_horse.ogg,sfx,tools/pipeline/generators/gen_m1_sfx.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Pfiff für das Pferd
+assets/audio/sfx/wing_flap.ogg,sfx,tools/pipeline/generators/gen_m1_sfx.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Flügelschlag Fee
 assets/fonts/glimmer.fnt,font,tools/pipeline/generators/gen_font_glimmer.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,BMFont-Beschreibung zu glimmer.png
 assets/fonts/glimmer.png,font,tools/pipeline/generators/gen_font_glimmer.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"Pixel-Schrift Glimmer, 118 Glyphen"
 assets/palette/starlight.hex,palette,tools/pipeline/generators/gen_palette.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"Master-Palette, 64 Farben"
 assets/palette/starlight_strip.png,palette,tools/pipeline/generators/gen_palette.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,64x1-Lookup für Shader
 assets/palette/starlight_swatch.png,palette,tools/pipeline/generators/gen_palette.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"Swatch, eine Zeile pro Rampe"
+assets/sprites/animals/dogs/collie_mix.json,sprite-meta,tools/pipeline/generators/gen_m1_characters.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Animationsdaten
+assets/sprites/animals/dogs/collie_mix.png,sprite,tools/pipeline/generators/gen_m1_characters.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Seelenhund Border-Collie-Mix
+assets/sprites/animals/horses/holunder.json,sprite-meta,tools/pipeline/generators/gen_m1_characters.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Animationsdaten
+assets/sprites/animals/horses/holunder.png,sprite,tools/pipeline/generators/gen_m1_characters.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"Pferd Holunder (Fuchs, Flachsmähne), Schritt/Trab/Galopp"
+assets/sprites/characters/klio_body.json,sprite-meta,tools/pipeline/generators/gen_m1_characters.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Animationsdaten
+assets/sprites/characters/klio_body.png,sprite,tools/pipeline/generators/gen_m1_characters.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"Klio Menschengröße: Körper/Kopf, idle/walk/ride x 3 Ansichten"
+assets/sprites/characters/klio_fairy.json,sprite-meta,tools/pipeline/generators/gen_m1_characters.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Animationsdaten
+assets/sprites/characters/klio_fairy.png,sprite,tools/pipeline/generators/gen_m1_characters.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Klio Feengröße 16x20
+assets/sprites/characters/klio_hair.json,sprite-meta,tools/pipeline/generators/gen_m1_characters.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Animationsdaten
+assets/sprites/characters/klio_hair.png,sprite,tools/pipeline/generators/gen_m1_characters.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"Klio lange Haare, 5 Schwungstufen je Ansicht"
+assets/sprites/characters/klio_wings.json,sprite-meta,tools/pipeline/generators/gen_m1_characters.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Animationsdaten
+assets/sprites/characters/klio_wings.png,sprite,tools/pipeline/generators/gen_m1_characters.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"Feenflügel, 6-Frame-Schleife"
+assets/sprites/fx/fx_particles.png,sprite,tools/pipeline/generators/gen_m1_world.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"Partikel 8x8: Funke, Funke groß, Herz, Staub, Licht, Feenstaub"
+assets/sprites/fx/shadow_large.png,sprite,tools/pipeline/generators/gen_m1_world.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Schatten Pferd
+assets/sprites/fx/shadow_medium.png,sprite,tools/pipeline/generators/gen_m1_world.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Schatten Klio
+assets/sprites/fx/shadow_small.png,sprite,tools/pipeline/generators/gen_m1_world.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Schatten Fee/Hund
 assets/sprites/fx/sparkle_16.png,sprite,tools/pipeline/generators/gen_m0_placeholders.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Funkelstern 16x16
+assets/sprites/fx/transform_flash.png,sprite,tools/pipeline/generators/gen_m1_world.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Lichtblitz der Verwandlung
+assets/sprites/ui/hud_icons.png,ui,tools/pipeline/generators/gen_m1_world.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"HUD-Symbole 16x16: Feenglanz, Flugenergie"
 assets/sprites/ui/icon.ico,icon,tools/pipeline/generators/gen_m0_placeholders.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Windows-Icon 16-256 px
 assets/sprites/ui/icon_256.png,icon,tools/pipeline/generators/gen_m0_placeholders.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,App-Icon x8 Nearest
 assets/sprites/ui/icon_32.png,icon,tools/pipeline/generators/gen_m0_placeholders.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,App-Icon 32x32 (Quelle)
+assets/tilesets/mooswiesen/bush.png,tileset,tools/pipeline/generators/gen_m1_world.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Busch 32x32
+assets/tilesets/mooswiesen/fairy_ring.png,tileset,tools/pipeline/generators/gen_m1_world.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Feenring 64x32
+assets/tilesets/mooswiesen/flowers.png,tileset,tools/pipeline/generators/gen_m1_world.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Blumen-Deko 32x32
+assets/tilesets/mooswiesen/meadow_tiles.png,tileset,tools/pipeline/generators/gen_m1_world.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"Gras(4), Weg/Wasser/Zaun je 16 Kantenmasken"
 assets/tilesets/mooswiesen/placeholder_grass.png,tileset,tools/pipeline/generators/gen_m0_placeholders.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,M0-Platzhalter Gras 32x32
+assets/tilesets/mooswiesen/rock.png,tileset,tools/pipeline/generators/gen_m1_world.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Stein 32x32
+assets/tilesets/mooswiesen/tree.png,tileset,tools/pipeline/generators/gen_m1_world.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Laubbaum 64x96

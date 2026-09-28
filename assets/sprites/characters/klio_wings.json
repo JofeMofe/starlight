@@ -1,0 +1,34 @@
+{
+  "frame_size": [
+    16,
+    20
+  ],
+  "animations": {
+    "wings_down": {
+      "row": 0,
+      "frames": 6,
+      "durations_ms": [
+        70,
+        40,
+        50,
+        70,
+        60,
+        60
+      ],
+      "loop": true
+    },
+    "wings_side": {
+      "row": 1,
+      "frames": 6,
+      "durations_ms": [
+        70,
+        40,
+        50,
+        70,
+        60,
+        60
+      ],
+      "loop": true
+    }
+  }
+}

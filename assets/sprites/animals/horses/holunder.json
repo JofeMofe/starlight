@@ -1,0 +1,272 @@
+{
+  "frame_size": [
+    96,
+    64
+  ],
+  "animations": {
+    "idle_side": {
+      "row": 0,
+      "frames": 4,
+      "durations_ms": [
+        700,
+        160,
+        220,
+        160
+      ],
+      "loop": true,
+      "bob": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "idle_down": {
+      "row": 1,
+      "frames": 1,
+      "durations_ms": [
+        1000
+      ],
+      "loop": true,
+      "bob": [
+        0
+      ]
+    },
+    "idle_up": {
+      "row": 2,
+      "frames": 1,
+      "durations_ms": [
+        1000
+      ],
+      "loop": true,
+      "bob": [
+        0
+      ]
+    },
+    "walk_side": {
+      "row": 3,
+      "frames": 8,
+      "durations_ms": [
+        130,
+        130,
+        130,
+        130,
+        130,
+        130,
+        130,
+        130
+      ],
+      "loop": true,
+      "bob": [
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    "walk_down": {
+      "row": 4,
+      "frames": 8,
+      "durations_ms": [
+        130,
+        130,
+        130,
+        130,
+        130,
+        130,
+        130,
+        130
+      ],
+      "loop": true,
+      "bob": [
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    "walk_up": {
+      "row": 5,
+      "frames": 8,
+      "durations_ms": [
+        130,
+        130,
+        130,
+        130,
+        130,
+        130,
+        130,
+        130
+      ],
+      "loop": true,
+      "bob": [
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    "trot_side": {
+      "row": 6,
+      "frames": 8,
+      "durations_ms": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ],
+      "loop": true,
+      "bob": [
+        1,
+        0,
+        -1,
+        0,
+        1,
+        0,
+        -1,
+        0
+      ]
+    },
+    "trot_down": {
+      "row": 7,
+      "frames": 8,
+      "durations_ms": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ],
+      "loop": true,
+      "bob": [
+        1,
+        0,
+        -1,
+        0,
+        1,
+        0,
+        -1,
+        0
+      ]
+    },
+    "trot_up": {
+      "row": 8,
+      "frames": 8,
+      "durations_ms": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ],
+      "loop": true,
+      "bob": [
+        1,
+        0,
+        -1,
+        0,
+        1,
+        0,
+        -1,
+        0
+      ]
+    },
+    "canter_side": {
+      "row": 9,
+      "frames": 8,
+      "durations_ms": [
+        85,
+        75,
+        70,
+        70,
+        80,
+        80,
+        75,
+        85
+      ],
+      "loop": true,
+      "bob": [
+        1,
+        1,
+        0,
+        -1,
+        -2,
+        -1,
+        0,
+        0
+      ]
+    },
+    "canter_down": {
+      "row": 10,
+      "frames": 8,
+      "durations_ms": [
+        85,
+        75,
+        70,
+        70,
+        80,
+        80,
+        75,
+        85
+      ],
+      "loop": true,
+      "bob": [
+        1,
+        1,
+        0,
+        -1,
+        -2,
+        -1,
+        0,
+        0
+      ]
+    },
+    "canter_up": {
+      "row": 11,
+      "frames": 8,
+      "durations_ms": [
+        85,
+        75,
+        70,
+        70,
+        80,
+        80,
+        75,
+        85
+      ],
+      "loop": true,
+      "bob": [
+        1,
+        1,
+        0,
+        -1,
+        -2,
+        -1,
+        0,
+        0
+      ]
+    }
+  }
+}

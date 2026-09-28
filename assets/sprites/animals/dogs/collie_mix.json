@@ -1,0 +1,191 @@
+{
+  "frame_size": [
+    32,
+    24
+  ],
+  "animations": {
+    "idle_side": {
+      "row": 0,
+      "frames": 4,
+      "durations_ms": [
+        140,
+        140,
+        140,
+        140
+      ],
+      "loop": true
+    },
+    "idle_down": {
+      "row": 1,
+      "frames": 1,
+      "durations_ms": [
+        1000
+      ],
+      "loop": true
+    },
+    "idle_up": {
+      "row": 2,
+      "frames": 4,
+      "durations_ms": [
+        140,
+        140,
+        140,
+        140
+      ],
+      "loop": true
+    },
+    "sit_side": {
+      "row": 3,
+      "frames": 4,
+      "durations_ms": [
+        160,
+        160,
+        160,
+        160
+      ],
+      "loop": true
+    },
+    "sit_down": {
+      "row": 4,
+      "frames": 1,
+      "durations_ms": [
+        1000
+      ],
+      "loop": true
+    },
+    "sit_up": {
+      "row": 5,
+      "frames": 1,
+      "durations_ms": [
+        1000
+      ],
+      "loop": true
+    },
+    "walk_side": {
+      "row": 6,
+      "frames": 6,
+      "durations_ms": [
+        110,
+        110,
+        110,
+        110,
+        110,
+        110
+      ],
+      "loop": true,
+      "bob": [
+        0,
+        1,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    "walk_down": {
+      "row": 7,
+      "frames": 6,
+      "durations_ms": [
+        110,
+        110,
+        110,
+        110,
+        110,
+        110
+      ],
+      "loop": true,
+      "bob": [
+        0,
+        1,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    "walk_up": {
+      "row": 8,
+      "frames": 6,
+      "durations_ms": [
+        110,
+        110,
+        110,
+        110,
+        110,
+        110
+      ],
+      "loop": true,
+      "bob": [
+        0,
+        1,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    "run_side": {
+      "row": 9,
+      "frames": 6,
+      "durations_ms": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "loop": true,
+      "bob": [
+        0,
+        -1,
+        -1,
+        0,
+        1,
+        1
+      ]
+    },
+    "run_down": {
+      "row": 10,
+      "frames": 6,
+      "durations_ms": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "loop": true,
+      "bob": [
+        0,
+        -1,
+        -1,
+        0,
+        1,
+        1
+      ]
+    },
+    "run_up": {
+      "row": 11,
+      "frames": 6,
+      "durations_ms": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "loop": true,
+      "bob": [
+        0,
+        -1,
+        -1,
+        0,
+        1,
+        1
+      ]
+    }
+  }
+}

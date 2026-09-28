@@ -26,6 +26,8 @@ class Animation:
     # Dauer pro Frame in Millisekunden (bewusstes Timing statt gleich lang)
     durations_ms: list[int] = field(default_factory=list)
     loop: bool = True
+    # Zusätzliche Daten pro Animation (z. B. "bob": Körperversatz pro Frame)
+    extra: dict = field(default_factory=dict)
 
 
 def pack(animations: list[Animation], out_png: Path) -> Path:
@@ -49,6 +51,7 @@ def pack(animations: list[Animation], out_png: Path) -> Path:
             "frames": len(anim.frames),
             "durations_ms": anim.durations_ms or [100] * len(anim.frames),
             "loop": anim.loop,
+            **anim.extra,
         }
     save_png(sheet, out_png)
     out_png.with_suffix(".json").write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")

@@ -1,0 +1,185 @@
+{
+  "frame_size": [
+    32,
+    48
+  ],
+  "animations": {
+    "idle_down": {
+      "row": 0,
+      "frames": 6,
+      "durations_ms": [
+        420,
+        300,
+        360,
+        300,
+        380,
+        130
+      ],
+      "loop": true,
+      "bob": [
+        0,
+        0,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    "idle_up": {
+      "row": 1,
+      "frames": 6,
+      "durations_ms": [
+        420,
+        300,
+        360,
+        300,
+        380,
+        130
+      ],
+      "loop": true,
+      "bob": [
+        0,
+        0,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    "idle_side": {
+      "row": 2,
+      "frames": 6,
+      "durations_ms": [
+        420,
+        300,
+        360,
+        300,
+        380,
+        130
+      ],
+      "loop": true,
+      "bob": [
+        0,
+        0,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    "walk_down": {
+      "row": 3,
+      "frames": 8,
+      "durations_ms": [
+        110,
+        90,
+        90,
+        110,
+        110,
+        90,
+        90,
+        110
+      ],
+      "loop": true,
+      "bob": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    "walk_up": {
+      "row": 4,
+      "frames": 8,
+      "durations_ms": [
+        110,
+        90,
+        90,
+        110,
+        110,
+        90,
+        90,
+        110
+      ],
+      "loop": true,
+      "bob": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    "walk_side": {
+      "row": 5,
+      "frames": 8,
+      "durations_ms": [
+        110,
+        90,
+        90,
+        110,
+        110,
+        90,
+        90,
+        110
+      ],
+      "loop": true,
+      "bob": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    "ride_down": {
+      "row": 6,
+      "frames": 2,
+      "durations_ms": [
+        2600,
+        140
+      ],
+      "loop": true,
+      "bob": [
+        0,
+        0
+      ]
+    },
+    "ride_up": {
+      "row": 7,
+      "frames": 2,
+      "durations_ms": [
+        2600,
+        140
+      ],
+      "loop": true,
+      "bob": [
+        0,
+        0
+      ]
+    },
+    "ride_side": {
+      "row": 8,
+      "frames": 2,
+      "durations_ms": [
+        2600,
+        140
+      ],
+      "loop": true,
+      "bob": [
+        0,
+        0
+      ]
+    }
+  }
+}

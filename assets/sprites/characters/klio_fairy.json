@@ -1,0 +1,35 @@
+{
+  "frame_size": [
+    16,
+    20
+  ],
+  "animations": {
+    "fairy_down": {
+      "row": 0,
+      "frames": 2,
+      "durations_ms": [
+        3000,
+        140
+      ],
+      "loop": true
+    },
+    "fairy_up": {
+      "row": 1,
+      "frames": 2,
+      "durations_ms": [
+        3000,
+        140
+      ],
+      "loop": true
+    },
+    "fairy_side": {
+      "row": 2,
+      "frames": 2,
+      "durations_ms": [
+        3000,
+        140
+      ],
+      "loop": true
+    }
+  }
+}
