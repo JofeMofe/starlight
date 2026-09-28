@@ -1,0 +1,33 @@
+{
+  "_doc": "Standardbelegung (§4.6). Format: key:<Taste, physisch>, mouse:<left|right|middle|wheel_up|wheel_down>, joy_button:<Name>, joy_axis:<Achse><+|->. Überschreibungen der Spielerin landen in user://settings.cfg [input].",
+  "deadzone": 0.25,
+  "actions": {
+    "move_up":     ["key:W", "key:Up", "joy_button:dpad_up", "joy_axis:left_y-"],
+    "move_down":   ["key:S", "key:Down", "joy_button:dpad_down", "joy_axis:left_y+"],
+    "move_left":   ["key:A", "key:Left", "joy_button:dpad_left", "joy_axis:left_x-"],
+    "move_right":  ["key:D", "key:Right", "joy_button:dpad_right", "joy_axis:left_x+"],
+    "interact":    ["key:E", "mouse:right", "joy_button:a"],
+    "use_tool":    ["mouse:left", "key:C", "joy_button:rb"],
+    "size_toggle": ["key:Q", "joy_button:y"],
+    "fly_jump":    ["key:Space", "joy_button:b"],
+    "inventory":   ["key:Tab", "key:I", "joy_button:start"],
+    "pause":       ["key:Escape", "joy_button:back"],
+    "dog_call":    ["key:F", "joy_button:x"],
+    "whistle":     ["key:R", "joy_button:lb"],
+    "tool_prev":   ["mouse:wheel_up", "joy_axis:lt+"],
+    "tool_next":   ["mouse:wheel_down", "joy_axis:rt+"],
+    "tool_1":      ["key:1"],
+    "tool_2":      ["key:2"],
+    "tool_3":      ["key:3"],
+    "tool_4":      ["key:4"],
+    "tool_5":      ["key:5"],
+    "tool_6":      ["key:6"],
+    "tool_7":      ["key:7"],
+    "tool_8":      ["key:8"],
+    "tool_9":      ["key:9"],
+    "tool_10":     ["key:0"],
+    "photo_mode":  ["key:P"],
+    "debug_screenshot": ["key:F12"],
+    "debug_toggle_locale": ["key:F2"]
+  }
+}

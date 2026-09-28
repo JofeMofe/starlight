@@ -4,3 +4,4 @@ assets/normalmaps/*          # Normal Maps kodieren Richtungen, keine Farben
 assets/sprites/fx/light_*    # Lichttexturen für PointLight2D (weiche Verläufe)
 assets/sprites/**/mask_*     # Graustufen-/Indexmasken für Palette-Swap
 assets/sprites/ui/overlay_*  # UI-Transparenzen (Abdunkler, Vignetten)
+assets/fonts/*               # Glyphenmasken (weiß), Einfärbung zur Laufzeit

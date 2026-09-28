@@ -23,14 +23,14 @@ def grass_tile() -> Image.Image:
     img = Image.new("RGBA", (32, 32), color("moss", 3))
     px = img.load()
     # Weiche Farbflecken (dunkler/heller), wrap-around -> nahtlos
-    for _ in range(26):
+    for _ in range(14):
         cx, cy = rng.randrange(32), rng.randrange(32)
-        shade = color("moss", 2) if rng.random() < 0.5 else color("moss", 4)
+        shade = color("moss", 2) if rng.random() < 0.35 else color("moss", 4)
         for dx, dy in ((0, 0), (1, 0), (0, 1), (-1, 0)):
             if rng.random() < 0.8:
                 px[(cx + dx) % 32, (cy + dy) % 32] = shade
     # Halmbüschel: dunkler Fuß, heller Spitzenpixel (Licht von oben links)
-    for _ in range(9):
+    for _ in range(6):
         cx, cy = rng.randrange(32), rng.randrange(32)
         for blade in (-1, 0, 1):
             height = 2 + (blade == 0)

@@ -1,4 +1,6 @@
 pfad,typ,quelle_url,autor,lizenz,lizenz_url,abruf_datum,modifiziert,notiz
+assets/fonts/glimmer.fnt,font,tools/pipeline/generators/gen_font_glimmer.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,BMFont-Beschreibung zu glimmer.png
+assets/fonts/glimmer.png,font,tools/pipeline/generators/gen_font_glimmer.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"Pixel-Schrift Glimmer, 118 Glyphen"
 assets/palette/starlight.hex,palette,tools/pipeline/generators/gen_palette.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"Master-Palette, 64 Farben"
 assets/palette/starlight_strip.png,palette,tools/pipeline/generators/gen_palette.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,64x1-Lookup für Shader
 assets/palette/starlight_swatch.png,palette,tools/pipeline/generators/gen_palette.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"Swatch, eine Zeile pro Rampe"

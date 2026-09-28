@@ -1,0 +1,11 @@
+{
+  "_doc": "Relative Wetter-Gewichte je Jahreszeit (spring, summer, autumn, winter). Siehe GDD §Wetter. Tag 1 jeder Jahreszeit ist immer sonnig.",
+  "forecast_days": 3,
+  "first_day_of_season": "sunny",
+  "weights": {
+    "spring": {"sunny": 40, "cloudy": 20, "rain": 25, "storm": 4, "fog": 8, "wind": 6, "starfall": 1},
+    "summer": {"sunny": 55, "cloudy": 15, "rain": 12, "storm": 8, "fog": 2, "wind": 7, "starfall": 3},
+    "autumn": {"sunny": 30, "cloudy": 22, "rain": 22, "storm": 5, "fog": 12, "wind": 10, "starfall": 1},
+    "winter": {"sunny": 25, "cloudy": 25, "snow": 35, "fog": 8, "wind": 6, "starfall": 1}
+  }
+}
