@@ -21,9 +21,9 @@ Format: **[Bereich] Beschreibung** – Auswirkung – geplante Lösung (Meilenst
   `run_all_checks` importiert deshalb zweimal und wertet nur den zweiten Lauf aus.
 - **[Build] rcedit wird für Icon/Versionsinfo der Windows-Exe benötigt** (Godot 4.4). Ohne rcedit
   exportiert Godot mit Warnung und Standard-Icon. Unter Linux nur mit Wine und UTF-8-Locale korrekt.
-- **[Umgebung] Windows-Build wurde unter Wine getestet**, nicht auf echtem Windows 11. Bitte einmal auf
-  echter Hardware starten (siehe „Bitte testen“ im M0-Bericht).
 
 ## Erledigt
 
-(noch nichts)
+- **[Umgebung] Windows-Build nur unter Wine getestet** – 2026-09-28 von der Projektinhaberin auf echtem
+  Windows bestätigt: Start, Schärfe, Sprachwechsel (F2), Integer-Skalierung im maximierten Fenster,
+  Screenshot (F12) und Programm-Infos funktionieren.

@@ -100,10 +100,16 @@ Git sauber. Freier Speicher 28 GB.
 - rcedit unter Wine zerstörte „–“/„©“ ohne UTF-8-Locale → `LC_ALL=C.UTF-8` beim Export.
 - Godot importierte `docs/ASSET_MANIFEST.csv` als Übersetzung → `.gdignore` in `docs/`.
 
+### Test auf echtem Windows (2026-09-28)
+
+Der Windows-Build (`Starlight.exe`, als 7z übergeben) wurde auf echter Hardware getestet: Start,
+pixelscharfe Darstellung, Sprachwechsel F2, maximiertes Fenster mit Integer-Skalierung,
+Screenshot F12 nach `%APPDATA%\Starlight\screenshots` und Programm-Infos → **alles in Ordnung**.
+
 ### Offene Punkte / nächste Schritte (M1 „Das Gefühl“)
 
 - Test-Wiese 40 × 30 Tiles, Klio als erkennbare Figur in beiden Größen (Haare als eigener Layer,
   Brille, Flügel), Größenwechsel mit vollem Effekt, Fliegen mit eigenem Kollisionslayer,
   Hund (folgen, streicheln, reiten), Pferd (streicheln, reiten, 3 Gangarten), Kamera mit
   Subpixel-Glättung, erste SFX.
-- `run_all_checks.ps1` einmal auf echtem Windows 11 laufen lassen.
+- `run_all_checks.ps1` ist auf Windows weiterhin ungetestet (braucht Godot + Python beim Nutzer; niedrige Priorität).
