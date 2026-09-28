@@ -30,7 +30,7 @@ fail() { echo "FEHLGESCHLAGEN: $1"; FAILED+=("$1"); }
 
 # Fehler-/Warnungszeilen in Godot-Logs, die nichts mit dem Projekt zu tun
 # haben (fehlende Soundkarte/VSync in der Container-/Xvfb-Umgebung).
-ENV_NOISE='ALSA lib|audio_driver_alsa|All audio drivers failed|falling back to the dummy driver|V-Sync mode|at: (init_output_device|initialize|_set_vsync|window_set_vsync_mode)'
+ENV_NOISE='ALSA lib|audio_driver_alsa|audio_driver_wasapi|WASAPI|All audio drivers failed|falling back to the dummy driver|V-Sync mode|Condition "hr != ..HRESULT.0x00000000|at: (init_output_device|initialize|init|audio_device_init|_set_vsync|set_use_vsync|window_set_vsync_mode) '
 
 check_log_clean() {  # $1 = Logdatei, $2 = Schrittname
   local hits
@@ -83,7 +83,7 @@ if [ "$QUICK" -eq 0 ]; then
   if [ -f build/windows/Starlight.exe ]; then
     ls -la build/windows/Starlight.exe
     if command -v wine > /dev/null && command -v xvfb-run > /dev/null; then
-      WINEDEBUG=-all timeout $((SMOKE_SECONDS + 120)) xvfb-run -a -s "-screen 0 1920x1080x24" \
+      LC_ALL=C.UTF-8 WINEDEBUG=-all timeout $((SMOKE_SECONDS + 120)) xvfb-run -a -s "-screen 0 1920x1080x24" \
         wine build/windows/Starlight.exe --resolution 1280x720 --smoke --smoke-seconds="$SMOKE_SECONDS" \
         > "$LOG_DIR/run_windows.log" 2>&1
       WIN_EXIT=$?

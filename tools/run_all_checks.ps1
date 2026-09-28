@@ -1,4 +1,4 @@
-# Ein Befehl für alle Prüfungen (§12.7) – Windows 11 / PowerShell 5.1.
+﻿# Ein Befehl für alle Prüfungen (§12.7) – Windows 11 / PowerShell 5.1.
 #   1. Asset-Pipeline  2. Godot-Import  3. GDScript-Lint  4. Unit-/Integrationstests
 #   5. Headless-Smoke-Bot  6. Windows-Export + 60-s-Lauf mit --smoke
 # Aufruf:  powershell -ExecutionPolicy Bypass -File tools\run_all_checks.ps1 [-Quick] [-SmokeSeconds 60]
