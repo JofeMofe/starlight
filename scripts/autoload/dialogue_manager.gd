@@ -42,7 +42,7 @@ func start(dialogue_id: StringName, context: Dictionary = {}) -> bool:
 	_lines.clear()
 	for line: Variant in data.get("lines", []) as Array:
 		var d: Dictionary = line as Dictionary
-		if conditions_met(d.get("if", {}) as Dictionary, context):
+		if DialogueConditions.met(d.get("if", {}) as Dictionary, context):
 			_lines.append(d)
 	if _lines.is_empty():
 		return false
@@ -84,38 +84,3 @@ func end() -> void:
 ## Übersetzt eine Zeile und setzt Kontextvariablen ein.
 func render_text(text_key: String) -> String:
 	return Localization.text(text_key, _context)
-
-
-## Prüft Bedingungen einer Zeile. Unbekannte Bedingungen gelten als nicht
-## erfüllt, damit Tippfehler in Daten auffallen statt still durchzurutschen.
-static func conditions_met(conditions: Dictionary, context: Dictionary) -> bool:
-	for key: Variant in conditions:
-		var expected: Variant = conditions[key]
-		match str(key):
-			"min_hearts":
-				if float(context.get("hearts", 0.0)) < float(expected):
-					return false
-			"max_hearts":
-				if float(context.get("hearts", 0.0)) > float(expected):
-					return false
-			"flag":
-				var flags: Dictionary = context.get("flags", {}) as Dictionary
-				if not bool(flags.get(str(expected), false)):
-					return false
-			"not_flag":
-				var flags_n: Dictionary = context.get("flags", {}) as Dictionary
-				if bool(flags_n.get(str(expected), false)):
-					return false
-			"min_hour":
-				if int(context.get("hour", 0)) < int(expected):
-					return false
-			"max_hour":
-				if int(context.get("hour", 0)) > int(expected):
-					return false
-			"season", "weather", "dog_present":
-				if context.get(str(key)) != expected:
-					return false
-			_:
-				push_warning("DialogueManager: unbekannte Bedingung '%s'" % key)
-				return false
-	return true

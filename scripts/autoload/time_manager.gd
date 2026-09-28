@@ -66,6 +66,7 @@ func advance_minutes(minutes: float) -> void:
 	for m: int in range(before + 1, after + 1):
 		EventBus.minute_changed.emit(m)
 		if m % MINUTES_PER_HOUR == 0:
+			@warning_ignore("integer_division")
 			EventBus.hour_changed.emit((m / MINUTES_PER_HOUR) % 24)
 	if after >= config.day_end_minute:
 		pass_out()
@@ -102,6 +103,7 @@ func is_paused() -> bool:
 # --- Abfragen --------------------------------------------------------------
 
 func hour() -> int:
+	@warning_ignore("integer_division")
 	return (int(minute_of_day) / MINUTES_PER_HOUR) % 24
 
 

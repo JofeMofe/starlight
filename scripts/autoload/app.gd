@@ -18,8 +18,6 @@ var start_scene: String = INITIAL_SCENE
 var screenshot_path: String = ""
 var screenshot_delay: int = DEFAULT_SCREENSHOT_DELAY
 
-var _errors_seen: int = 0
-
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -43,7 +41,7 @@ func pixel_scale() -> int:
 		int(ProjectSettings.get_setting("display/window/size/viewport_width")),
 		int(ProjectSettings.get_setting("display/window/size/viewport_height")))
 	var win: Vector2i = get_window().size
-	return maxi(1, mini(win.x / base.x, win.y / base.y))
+	return maxi(1, mini(floori(float(win.x) / base.x), floori(float(win.y) / base.y)))
 
 
 ## Speichert das aktuelle Bild als PNG. Der Viewport rendert in 640x360;

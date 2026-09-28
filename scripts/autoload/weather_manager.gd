@@ -33,6 +33,7 @@ func weather_for_day(absolute_day: int) -> StringName:
 	var day_of_season: int = ((absolute_day - 1) % days_per_season) + 1
 	if day_of_season == 1:
 		return _first_day_weather
+	@warning_ignore("integer_division")
 	var season_index: int = ((absolute_day - 1) / days_per_season) % seasons
 	var weights: Dictionary = _weights.get(String(TimeManager.SEASON_KEYS[season_index]), {}) as Dictionary
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()

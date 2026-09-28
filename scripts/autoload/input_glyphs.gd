@@ -50,10 +50,10 @@ func label_for(action: StringName) -> String:
 
 
 func _detect_family(device: int) -> void:
-	var name: String = Input.get_joy_name(device).to_lower()
-	if "playstation" in name or "dualshock" in name or "dualsense" in name or "ps4" in name or "ps5" in name:
+	var joy_name: String = Input.get_joy_name(device).to_lower()
+	if "playstation" in joy_name or "dualshock" in joy_name or "dualsense" in joy_name or "ps4" in joy_name or "ps5" in joy_name:
 		family = Family.PLAYSTATION
-	elif "nintendo" in name or "switch" in name or "joy-con" in name:
+	elif "nintendo" in joy_name or "switch" in joy_name or "joy-con" in joy_name:
 		family = Family.NINTENDO
 	else:
 		family = Family.XBOX
