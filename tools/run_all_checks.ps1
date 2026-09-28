@@ -63,6 +63,13 @@ Select-String -Path "$LogDir\smoke_bot.log" -Pattern "SMOKE_RUN" | ForEach-Objec
 if ($smokeExit -ne 0) { Fail "Smoke-Bot (Exit $smokeExit)" }
 Test-LogClean "$LogDir\smoke_bot.log" "Smoke-Bot"
 
+Write-Host "--- M1-Bot (Kernmechanik) ---"
+& $Godot --headless --path . res://tests/smoke/m1_bot.tscn *> "$LogDir\m1_bot.log"
+$m1Exit = $LASTEXITCODE
+Select-String -Path "$LogDir\m1_bot.log" -Pattern "M1_BOT" | ForEach-Object { $_.Line }
+if ($m1Exit -ne 0) { Fail "M1-Bot (Exit $m1Exit)" }
+Test-LogClean "$LogDir\m1_bot.log" "M1-Bot"
+
 if (-not $Quick) {
     Step "6/6 Windows-Export + Start"
     New-Item -ItemType Directory -Force -Path "build\windows" | Out-Null

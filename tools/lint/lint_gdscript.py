@@ -28,7 +28,7 @@ def main() -> int:
     cmd = [godot_binary(), "--headless", "--path", str(ROOT), "-d", "-s", "res://tools/lint/gdscript_lint.gd"]
     proc = subprocess.run(cmd, stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=300)
     output = ANSI.sub("", proc.stdout + proc.stderr)
-    current = None
+    current = "(Projektstart)"
     problems: list[str] = []
     done = False
     for line in output.splitlines():
@@ -36,8 +36,8 @@ def main() -> int:
             current = line.split(" ", 1)[1]
         elif line.startswith("LINT_DONE"):
             done = True
-            current = None
-        elif current and (line.startswith("ERROR:") or line.startswith("WARNING:") or "SCRIPT ERROR" in line):
+            current = "(Programmende)"
+        elif (line.startswith("ERROR:") or line.startswith("WARNING:") or "SCRIPT ERROR" in line):
             problems.append(f"{current}: {line.strip()}")
     for p in problems:
         print("WARNUNG", p)

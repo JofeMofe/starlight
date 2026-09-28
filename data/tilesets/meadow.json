@@ -1,0 +1,18 @@
+{
+  "_doc": "Kachelsatz Mooswiesen (M1-Platzhalter). Zeilen im Atlas; 'mask' = 16 Kantenvarianten (Index = Nachbarbits N1 O2 S4 W8). collision: Ebene aus PhysicsLayers; inset = Abstand der Kollision zum Rand an offenen Seiten (px).",
+  "texture": "res://assets/tilesets/mooswiesen/meadow_tiles.png",
+  "tile_size": 32,
+  "terrains": {
+    "grass": {"row": 0, "variants": 4, "layer": "ground"},
+    "path":  {"row": 1, "mask": true, "layer": "ground"},
+    "water": {"row": 2, "mask": true, "layer": "ground", "collision": "solid_low", "inset": 5},
+    "fence": {"row": 3, "mask": true, "layer": "objects", "collision": "solid_low", "fence": true}
+  },
+  "objects": {
+    "tree": "res://scenes/world/objects/tree.tscn",
+    "bush": "res://scenes/world/objects/bush.tscn",
+    "rock": "res://scenes/world/objects/rock.tscn",
+    "flowers": "res://scenes/world/objects/flowers.tscn",
+    "fairy_ring": "res://scenes/world/objects/fairy_ring.tscn"
+  }
+}

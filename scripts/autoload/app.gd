@@ -10,7 +10,7 @@ extends Node
 
 const DEFAULT_SMOKE_SECONDS: float = 60.0
 const DEFAULT_SCREENSHOT_DELAY: int = 30
-const INITIAL_SCENE: String = "res://scenes/main/m0_test_scene.tscn"
+const INITIAL_SCENE: String = "res://scenes/world/test_meadow.tscn"
 
 var smoke_mode: bool = false
 var smoke_seconds: float = DEFAULT_SMOKE_SECONDS

@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="MovementConfig" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data_types/movement_config.gd" id="1_move"]
+
+[resource]
+script = ExtResource("1_move")
+human_speed = 82.0
+human_accel = 760.0
+human_friction = 1050.0
+fairy_speed = 70.0
+fairy_fly_speed = 98.0
+fairy_accel = 430.0
+fairy_friction = 520.0
+fly_height = 10.0
+hover_amplitude = 1.5
+hover_frequency = 2.2
+flight_energy_max = 100.0
+flight_drain_per_second = 32.0
+flight_regen_per_second = 55.0
+flight_regen_delay = 0.35
+transform_duration = 0.4
+transform_swap_time = 0.2
+transform_glow_cost = 5.0
+free_transform_chapter = 4
+anywhere_transform_chapter = 2
+dog_follow_distance = 30.0
+dog_run_distance = 90.0
+dog_walk_speed = 62.0
+dog_run_speed = 128.0
+dog_accel = 600.0
+dog_ridden_speed = 150.0
+dog_ridden_accel = 820.0
+dog_sit_delay = 2.5
+horse_walk_speed = 52.0
+horse_trot_speed = 108.0
+horse_canter_speed = 172.0
+horse_accel = 170.0
+horse_decel = 230.0
+horse_turn_rates = PackedFloat32Array(420, 230, 150)
+horse_jump_duration = 0.46
+horse_jump_height = 11.0
+horse_come_speed = 95.0

@@ -4,3 +4,37 @@ ui.m0.subtitle,Meilenstein M0 – Fundament,Milestone M0 – Foundation
 ui.m0.scale,Fenster {w}×{h} · Pixel ×{s} · v{version},Window {w}×{h} · Pixels ×{s} · v{version}
 ui.m0.charset,Größenwandel: Äpfel & Möhren für Übermut – „Straße“ …,Size shift: apples & carrots for mischief – “street” …
 ui.m0.hint,Taste {key}: Sprache wechseln,Key {key}: switch language
+prompt.pet,Streicheln,Pet
+prompt.dog.ride,Aufsitzen,Hop on
+prompt.horse.mount,Aufsteigen,Mount
+prompt.dismount,Absteigen,Dismount
+prompt.ride.faster,Schneller,Faster
+prompt.ring.to_fairy,Zur Fee werden,Become a fairy
+prompt.ring.to_human,Menschengröße,Human size
+hint.transform.need_ring,Verwandeln geht jetzt nur an einem Feenring.,For now you can only transform at a fairy ring.
+hint.transform.no_glow,"Nicht genug Feenglanz – am Feenring geht es kostenlos.","Not enough fairy glow – it's free at a fairy ring."
+hint.transform.no_room,Hier ist nicht genug Platz für Menschengröße.,There isn't enough room for human size here.
+hint.transform.riding,"Erst absteigen, dann verwandeln.","Dismount first, then transform."
+hint.ride.stop_first,"Erst anhalten, dann absteigen.","Stop first, then dismount."
+hint.ride.no_room,Hier ist kein Platz zum Absteigen.,There's no room to dismount here.
+hint.horse.refuse,Hier springt das Pferd lieber nicht.,The horse would rather not jump here.
+gait.halt,Halt,Halt
+gait.walk,Schritt,Walk
+gait.trot,Trab,Trot
+gait.canter,Galopp,Canter
+help.title,Steuerung,Controls
+help.move,Bewegen,Move
+help.move_keys,WASD,WASD
+help.move_keys_pad,Linker Stick,Left stick
+help.size,"Größe wechseln (am Feenring gratis)","Change size (free at a fairy ring)"
+help.fly,"Fliegen (Fee, halten)","Fly (fairy, hold)"
+help.interact,"Streicheln, Auf-/Absteigen","Pet, mount, dismount"
+help.ride,"Reiten: schneller, Sprung","Riding: faster, jump"
+help.dog,Hund rufen,Call the dog
+help.whistle,Pferd herpfeifen,Whistle for the horse
+help.toggle,Hilfe ein/aus,Toggle help
+key.key.Space,Leertaste,Space
+key.key.Escape,Esc,Esc
+key.mouse.left,Linksklick,Left click
+key.mouse.right,Rechtsklick,Right click
+help.fps,Bildrate anzeigen,Show frame rate

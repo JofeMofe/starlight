@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/tilesets/mooswiesen/tree.png" id="1_tex"]
+
+[sub_resource type="CircleShape2D" id="Shape_trunk"]
+radius = 7.0
+
+[node name="Tree" type="StaticBody2D"]
+collision_mask = 0
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_tex")
+offset = Vector2(0, -46)
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("Shape_trunk")

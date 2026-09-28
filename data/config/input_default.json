@@ -28,6 +28,8 @@
     "tool_10":     ["key:0"],
     "photo_mode":  ["key:P"],
     "debug_screenshot": ["key:F12"],
-    "debug_toggle_locale": ["key:F2"]
+    "debug_toggle_locale": ["key:F2"],
+    "toggle_help": ["key:F1"],
+    "debug_fps": ["key:F3"]
   }
 }

@@ -1,0 +1,95 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://scenes/animals/horse.gd" id="1_horse"]
+[ext_resource type="Texture2D" path="res://assets/sprites/fx/shadow_large.png" id="2_shadow"]
+[ext_resource type="Texture2D" path="res://assets/sprites/animals/horses/holunder.png" id="3_sheet"]
+[ext_resource type="Script" path="res://scripts/components/sheet_animator.gd" id="4_anim"]
+[ext_resource type="Script" path="res://scripts/components/interactable.gd" id="5_interact"]
+[ext_resource type="Texture2D" path="res://assets/sprites/fx/fx_particles.png" id="6_fx"]
+
+[sub_resource type="RectangleShape2D" id="Shape_body"]
+size = Vector2(22, 8)
+
+[sub_resource type="RectangleShape2D" id="Shape_interact"]
+size = Vector2(52, 26)
+
+[sub_resource type="AtlasTexture" id="Tex_heart"]
+atlas = ExtResource("6_fx")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="Tex_dust"]
+atlas = ExtResource("6_fx")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="Gradient" id="Grad_fade"]
+offsets = PackedFloat32Array(0, 0.7, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Horse" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_horse")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("Shape_body")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.3)
+position = Vector2(0, -2)
+texture = ExtResource("2_shadow")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_sheet")
+offset = Vector2(0, -29)
+region_enabled = true
+region_rect = Rect2(0, 0, 96, 64)
+
+[node name="Anim" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("4_anim")
+sprite = NodePath("../Sprite")
+meta_path = "res://assets/sprites/animals/horses/holunder.json"
+autoplay = &"idle_side"
+
+[node name="Agent" type="NavigationAgent2D" parent="."]
+path_desired_distance = 10.0
+target_desired_distance = 20.0
+radius = 12.0
+
+[node name="Interactable" type="Area2D" parent="."]
+position = Vector2(0, -14)
+script = ExtResource("5_interact")
+
+[node name="Shape" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("Shape_interact")
+
+[node name="Hearts" type="CPUParticles2D" parent="."]
+position = Vector2(-18, -50)
+emitting = false
+amount = 6
+lifetime = 1.2
+one_shot = true
+explosiveness = 0.35
+texture = SubResource("Tex_heart")
+direction = Vector2(0, -1)
+spread = 35.0
+gravity = Vector2(0, -12)
+initial_velocity_min = 16.0
+initial_velocity_max = 26.0
+color_ramp = SubResource("Grad_fade")
+
+[node name="Dust" type="CPUParticles2D" parent="."]
+position = Vector2(0, -2)
+emitting = false
+amount = 10
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+texture = SubResource("Tex_dust")
+emission_shape = 3
+emission_rect_extents = Vector2(16, 2)
+direction = Vector2(0, -1)
+spread = 80.0
+gravity = Vector2(0, 30)
+initial_velocity_min = 12.0
+initial_velocity_max = 28.0
+color_ramp = SubResource("Grad_fade")

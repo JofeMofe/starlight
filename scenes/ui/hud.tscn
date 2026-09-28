@@ -1,0 +1,147 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1_hud"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/hud_icons.png" id="2_icons"]
+
+[sub_resource type="AtlasTexture" id="Tex_star"]
+atlas = ExtResource("2_icons")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="Tex_wing"]
+atlas = ExtResource("2_icons")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="StyleBoxFlat" id="Style_bar_bg"]
+bg_color = Color(0.168627, 0.129412, 0.25098, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.101961, 0.0784314, 0.137255, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="Style_glow_fill"]
+bg_color = Color(0.94902, 0.694118, 0.298039, 1)
+border_width_top = 1
+border_color = Color(0.972549, 0.827451, 0.415686, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="Style_flight_fill"]
+bg_color = Color(0.52549, 0.752941, 0.870588, 1)
+border_width_top = 1
+border_color = Color(0.721569, 0.87451, 0.941176, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="Style_panel"]
+bg_color = Color(0.168627, 0.129412, 0.25098, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.341176, 0.270588, 0.466667, 1)
+content_margin_left = 6.0
+content_margin_top = 4.0
+content_margin_right = 6.0
+content_margin_bottom = 4.0
+anti_aliasing = false
+
+[node name="HUD" type="CanvasLayer"]
+layer = 10
+script = ExtResource("1_hud")
+
+[node name="Glow" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 88.0
+offset_bottom = 24.0
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Glow"]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = SubResource("Tex_star")
+
+[node name="GlowBar" type="ProgressBar" parent="Glow"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 18.0
+offset_top = 5.0
+offset_right = 82.0
+offset_bottom = 11.0
+theme_override_styles/background = SubResource("Style_bar_bg")
+theme_override_styles/fill = SubResource("Style_glow_fill")
+value = 100.0
+show_percentage = false
+
+[node name="Flight" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 24.0
+offset_right = 88.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Flight"]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = SubResource("Tex_wing")
+
+[node name="FlightBar" type="ProgressBar" parent="Flight"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 18.0
+offset_top = 5.0
+offset_right = 82.0
+offset_bottom = 11.0
+theme_override_styles/background = SubResource("Style_bar_bg")
+theme_override_styles/fill = SubResource("Style_flight_fill")
+value = 100.0
+show_percentage = false
+
+[node name="Gait" type="Label" parent="."]
+unique_name_in_owner = true
+offset_top = 316.0
+offset_right = 640.0
+offset_bottom = 328.0
+horizontal_alignment = 1
+
+[node name="Prompt" type="Label" parent="."]
+unique_name_in_owner = true
+offset_top = 334.0
+offset_right = 640.0
+offset_bottom = 346.0
+horizontal_alignment = 1
+
+[node name="Toast" type="Label" parent="."]
+unique_name_in_owner = true
+offset_top = 296.0
+offset_right = 640.0
+offset_bottom = 308.0
+horizontal_alignment = 1
+
+[node name="Help" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+offset_left = 424.0
+offset_top = 8.0
+offset_right = 632.0
+offset_bottom = 136.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Style_panel")
+
+[node name="HelpText" type="Label" parent="Help"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Fps" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = 8.0
+offset_top = 42.0
+offset_right = 120.0
+offset_bottom = 54.0

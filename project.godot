@@ -8,7 +8,7 @@ config_version=5
 
 config/name="Starlight – Klio goes Fairy"
 config/description="Ein cozy Pixel-Art-Lebenssimulationsspiel im Glimmertal."
-config/version="0.0.1"
+config/version="0.1.1"
 run/main_scene="res://scenes/main/boot.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/bg_color=Color(0.101961, 0.0784314, 0.137255, 1)
@@ -71,9 +71,18 @@ theme/default_font_subpixel_positioning=0
 locale/translations=PackedStringArray("res://data/localization/strings.de.translation", "res://data/localization/strings.en.translation")
 locale/fallback="de"
 
+[layer_names]
+
+2d_physics/layer_1="solid_high"
+2d_physics/layer_2="solid_low"
+2d_physics/layer_3="player"
+2d_physics/layer_4="animals"
+2d_physics/layer_5="interact"
+
 [physics]
 
 common/physics_ticks_per_second=60
+common/physics_interpolation=true
 common/max_physics_steps_per_frame=8
 
 [rendering]

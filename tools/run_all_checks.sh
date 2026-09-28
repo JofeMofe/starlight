@@ -4,7 +4,7 @@
 #   2. Godot-Import
 #   3. GDScript-Lint (jede Warnung = Fehler)
 #   4. Unit- + Integrationstests (gdUnit4)
-#   5. Headless-Smoke-Bot (7 Spieltage)
+#   5. Headless-Smoke-Bot (7 Spieltage) + M1-Bot (Kernmechanik)
 #   6. Windows-Export + 60-s-Lauf mit --smoke (via Wine, falls vorhanden)
 #   7. Linux-Export + Smoke-Lauf
 # Optionen: --quick (ohne Exporte), --smoke-seconds=N (Standard 60)
@@ -71,6 +71,13 @@ SMOKE_EXIT=$?
 grep -E "SMOKE_RUN" "$LOG_DIR/smoke_bot.log" || true
 [ "$SMOKE_EXIT" -eq 0 ] || fail "Smoke-Bot (Exit $SMOKE_EXIT)"
 check_log_clean "$LOG_DIR/smoke_bot.log" "Smoke-Bot"
+
+echo "--- M1-Bot (Kernmechanik) ---"
+"$GODOT_BIN" --headless --path . res://tests/smoke/m1_bot.tscn > "$LOG_DIR/m1_bot.log" 2>&1
+M1_EXIT=$?
+grep -E "M1_BOT" "$LOG_DIR/m1_bot.log" || true
+[ "$M1_EXIT" -eq 0 ] || fail "M1-Bot (Exit $M1_EXIT)"
+check_log_clean "$LOG_DIR/m1_bot.log" "M1-Bot"
 
 if [ "$QUICK" -eq 0 ]; then
   step "6/7 Windows-Export + Start"

@@ -45,7 +45,10 @@ func label_for(action: StringName) -> String:
 		if using_gamepad and kind == "joy_axis":
 			return value.trim_suffix("+").trim_suffix("-").to_upper()
 		if not using_gamepad and kind in ["key", "mouse"]:
-			return value
+			# Tastennamen übersetzen, wo nötig (z. B. "Space" -> "Leertaste")
+			var loc_key: String = "key.%s.%s" % [kind, value]
+			var translated: String = tr(loc_key)
+			return translated if translated != loc_key else value
 	return "?"
 
 

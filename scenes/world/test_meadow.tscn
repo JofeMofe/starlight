@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scenes/world/meadow.gd" id="1_meadow"]
+[ext_resource type="PackedScene" path="res://scenes/player/klio.tscn" id="2_klio"]
+[ext_resource type="PackedScene" path="res://scenes/animals/dog.tscn" id="3_dog"]
+[ext_resource type="PackedScene" path="res://scenes/animals/horse.tscn" id="4_horse"]
+[ext_resource type="Script" path="res://scripts/components/pixel_camera.gd" id="5_cam"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="6_hud"]
+
+[node name="TestMeadow" type="Node2D"]
+script = ExtResource("1_meadow")
+
+[node name="Nav" type="NavigationRegion2D" parent="."]
+
+[node name="Ground" type="TileMapLayer" parent="Nav"]
+
+[node name="Deco" type="Node2D" parent="Nav"]
+
+[node name="World" type="Node2D" parent="Nav"]
+y_sort_enabled = true
+
+[node name="Fences" type="TileMapLayer" parent="Nav/World"]
+y_sort_enabled = true
+
+[node name="Horse" parent="Nav/World" instance=ExtResource("4_horse")]
+
+[node name="Dog" parent="Nav/World" instance=ExtResource("3_dog")]
+
+[node name="Klio" parent="Nav/World" instance=ExtResource("2_klio")]
+
+[node name="Walls" type="StaticBody2D" parent="Nav"]
+
+[node name="Camera" type="Camera2D" parent="."]
+process_callback = 0
+script = ExtResource("5_cam")
+
+[node name="HUD" parent="." instance=ExtResource("6_hud")]
