@@ -64,6 +64,7 @@ func build(ground: TileMapLayer, objects_layer: TileMapLayer, objects_parent: No
 				objects_layer.set_cell(cell, _source_id, coords)
 			else:
 				ground.set_cell(cell, _source_id, coords)
+	_scatter(objects_parent, deco_parent)
 	if bool(map_data.get("border_trees", false)):
 		_place_border_trees(objects_parent)
 	_build_walls(walls)
@@ -177,6 +178,24 @@ func _place_object(kind: String, cell: Vector2i, objects_parent: Node2D, deco_pa
 	else:
 		node.position = cell_center(cell)
 		deco_parent.add_child(node)
+
+
+## Verstreut Deko (hohes Gras, Kiesel, Blumen) auf freien Graskacheln.
+## Deterministisch über den Zellen-Hash: gleiche Karte = gleiche Wiese.
+func _scatter(objects_parent: Node2D, deco_parent: Node2D) -> void:
+	var rules: Array = map_data.get("scatter", []) as Array
+	for y: int in range(1, size.y - 1):
+		for x: int in range(1, size.x - 1):
+			var cell: Vector2i = Vector2i(x, y)
+			if kind_at(cell) != "grass":
+				continue
+			for i: int in rules.size():
+				var rule: Dictionary = rules[i] as Dictionary
+				var roll: float = float(absi(hash([cell, i, "scatter"])) % 10000) / 10000.0
+				if roll < float(rule.get("chance", 0.0)):
+					var prefix: String = "deco:" if bool(rule.get("deco", false)) else "object:"
+					_place_object(prefix + str(rule["object"]), cell, objects_parent, deco_parent)
+					break
 
 
 func _place_border_trees(parent: Node2D) -> void:

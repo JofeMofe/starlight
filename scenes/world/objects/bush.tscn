@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
+[ext_resource type="Texture2D" path="res://assets/sprites/fx/shadow_medium.png" id="2_shadow"]
 [ext_resource type="Texture2D" path="res://assets/tilesets/mooswiesen/bush.png" id="1_tex"]
 
 [sub_resource type="RectangleShape2D" id="Shape_bush"]
@@ -8,6 +9,11 @@ size = Vector2(24, 10)
 [node name="Bush" type="StaticBody2D"]
 collision_layer = 2
 collision_mask = 0
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.28)
+position = Vector2(1, -2)
+texture = ExtResource("2_shadow")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_tex")

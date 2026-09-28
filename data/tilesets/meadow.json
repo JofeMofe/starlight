@@ -3,16 +3,38 @@
   "texture": "res://assets/tilesets/mooswiesen/meadow_tiles.png",
   "tile_size": 32,
   "terrains": {
-    "grass": {"row": 0, "variants": 4, "layer": "ground"},
-    "path":  {"row": 1, "mask": true, "layer": "ground"},
-    "water": {"row": 2, "mask": true, "layer": "ground", "collision": "solid_low", "inset": 5},
-    "fence": {"row": 3, "mask": true, "layer": "objects", "collision": "solid_low", "fence": true}
+    "grass": {
+      "row": 0,
+      "variants": 4,
+      "layer": "ground"
+    },
+    "path": {
+      "row": 1,
+      "mask": true,
+      "layer": "ground"
+    },
+    "water": {
+      "row": 2,
+      "mask": true,
+      "layer": "ground",
+      "collision": "solid_low",
+      "inset": 5
+    },
+    "fence": {
+      "row": 3,
+      "mask": true,
+      "layer": "objects",
+      "collision": "solid_low",
+      "fence": true
+    }
   },
   "objects": {
     "tree": "res://scenes/world/objects/tree.tscn",
     "bush": "res://scenes/world/objects/bush.tscn",
     "rock": "res://scenes/world/objects/rock.tscn",
     "flowers": "res://scenes/world/objects/flowers.tscn",
-    "fairy_ring": "res://scenes/world/objects/fairy_ring.tscn"
+    "fairy_ring": "res://scenes/world/objects/fairy_ring.tscn",
+    "tall_grass": "res://scenes/world/objects/tall_grass.tscn",
+    "pebbles": "res://scenes/world/objects/pebbles.tscn"
   }
 }

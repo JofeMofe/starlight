@@ -1,5 +1,5 @@
 {
- "_doc": "Test-Wiese M1. Zeichen siehe legend. Rand: Bäume und unsichtbare Wände werden automatisch gesetzt. Objekt-Anker liegen auf der Kachelmitte unten.",
+ "_doc": "Test-Wiese M1. Zeichen siehe legend. Rand: Bäume und unsichtbare Wände werden automatisch gesetzt. Objekt-Anker liegen auf der Kachelmitte unten. scatter: zufällig (aber reproduzierbar) auf Graskacheln verteilte Deko; chance = Anteil der Graskacheln.",
  "name": "test_meadow",
  "tileset": "res://data/tilesets/meadow.json",
  "size": [
@@ -52,5 +52,20 @@
   ".....T.............=..........*.........",
   "........................................",
   "........................................"
+ ],
+ "scatter": [
+  {
+   "object": "tall_grass",
+   "chance": 0.07
+  },
+  {
+   "object": "pebbles",
+   "chance": 0.025
+  },
+  {
+   "object": "flowers",
+   "chance": 0.02,
+   "deco": true
+  }
  ]
 }

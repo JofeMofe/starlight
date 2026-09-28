@@ -378,8 +378,9 @@ func _update_facing(input: Vector2) -> void:
 
 
 func _order_tail() -> void:
-	# Seitlich hängen die Haare hinter dem Körper, sonst davor (über den Schultern/Rücken)
-	_human.move_child(_tail, 0 if view == "side" else _human.get_child_count() - 1)
+	# Von vorn und seitlich fällt das lange Haar hinter den Körper, von hinten
+	# liegt es über dem Rücken (davor).
+	_human.move_child(_tail, _human.get_child_count() - 1 if view == "up" else 0)
 
 
 func _play_body(anim: String) -> void:

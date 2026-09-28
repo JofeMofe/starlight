@@ -222,20 +222,24 @@ def tree_textured() -> Image.Image:
 
 
 def tall_grass(seed: int) -> Image.Image:
-    """16x16 hohes Grasbüschel: gebogene Halme, hinten dunkel, vorn hell."""
+    """16x16 hohes Grasbüschel: 9 gebogene Halme, hinten dunkel, vorn hell,
+    Spitzen mit Licht – gut sichtbar gegen die Wiese."""
     rng = random.Random(seed)
     img = Image.new("RGBA", (16, 16), TRANSPARENT)
     px = img.load()
-    blades = sorted([(rng.uniform(3, 12), rng.uniform(6, 12), rng.uniform(-3, 3)) for _ in range(7)],
+    blades = sorted([(rng.uniform(2, 13), rng.uniform(7, 14), rng.uniform(-3.5, 3.5)) for _ in range(9)],
                     key=lambda b: b[1])
     for i, (bx, height, lean) in enumerate(blades):
-        shade = 2 if i < 3 else (3 if i < 5 else 4)
-        for s in range(int(height)):
-            t = s / height
+        shade = 2 if i < 3 else (3 if i < 6 else 5)
+        for s_ in range(int(height)):
+            t = s_ / height
             x = int(round(bx + lean * t * t))
-            y = 15 - s
+            y = 15 - s_
             if 0 <= x < 16 and 0 <= y < 16:
-                px[x, y] = color("moss", shade if s < height - 2 else shade + 2)
+                tip = s_ >= height - 2
+                px[x, y] = color("moss", min(7, shade + (2 if tip else 0)))
+                if s_ < 3 and 0 <= x + 1 < 16 and i >= 6:
+                    px[x + 1, y] = color("moss", 3)
     return img
 
 

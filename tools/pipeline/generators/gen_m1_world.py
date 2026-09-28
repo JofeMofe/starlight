@@ -15,6 +15,7 @@ from PIL import Image
 
 from palette import color
 from sl_common import ASSETS, TRANSPARENT, GeneratedAsset, save_png
+from sprites import meadow_v2 as M2
 from sprites.rig import Material, Rig, render
 
 GEN = "tools/pipeline/generators/gen_m1_world.py"
@@ -87,6 +88,56 @@ def _edge_tile(mask: int, seed: int, inner: tuple, inner_dark: tuple, inner_ligh
             else:
                 r = rng.random()
                 px[x, y] = inner_dark if r < speckle else (inner_light if r > 1 - speckle * 0.6 else inner)
+    return img
+
+
+def _edge_textured(mask: int, seed: int, inner: Image.Image, fringe: tuple, shade: tuple,
+                   base_grass: Image.Image, inset: int = 4) -> Image.Image:
+    """Wie _edge_tile, aber die Innenfläche ist eine Textur (Weg/Wasser v2).
+    Am offenen Rand hängt ein Saum (fringe) über, innen eine Schattenlinie."""
+    img = base_grass.copy()
+    px = img.load()
+    ipx = inner.load()
+
+    def inside(x: int, y: int) -> float:
+        d = 99.0
+        wob = lambda v: 1.0 * math.sin(v * 0.9 + seed) + 0.6 * math.sin(v * 2.3 + seed * 2)
+        if not mask & N:
+            d = min(d, y - inset - wob(x))
+        if not mask & S:
+            d = min(d, (T - 1 - y) - inset - wob(x + 7))
+        if not mask & W:
+            d = min(d, x - inset - wob(y + 3))
+        if not mask & E:
+            d = min(d, (T - 1 - x) - inset - wob(y + 11))
+        return d
+
+    for y in range(T):
+        for x in range(T):
+            d = inside(x, y)
+            if d < 0:
+                continue
+            if d < 1.0:
+                px[x, y] = fringe
+            elif d < 2.0:
+                px[x, y] = shade
+            else:
+                px[x, y] = ipx[x, y]
+    return img
+
+
+def _water_inner(seed: int) -> Image.Image:
+    rng = random.Random(seed)
+    img = Image.new("RGBA", (T, T), color("sky", 3))
+    px = img.load()
+    for _ in range(40):
+        x, y = rng.randrange(T), rng.randrange(T)
+        px[x, y] = color("sky", 2)
+    for _ in range(3):
+        x, y = rng.randrange(T - 3), rng.randrange(T)
+        for dx in range(3):
+            px[x + dx, y] = color("sky", 4)
+        px[x + 1, y] = color("sky", 5)
     return img
 
 
@@ -336,33 +387,43 @@ def _small_star() -> Image.Image:
     return img
 
 
+def _pad32(img: Image.Image) -> Image.Image:
+    """16x16-Deko auf 32x32 (Kachelraster), unten mittig."""
+    out = Image.new("RGBA", (T, T), TRANSPARENT)
+    out.alpha_composite(img, (8, 16))
+    return out
+
+
 def build() -> list[GeneratedAsset]:
     out: list[GeneratedAsset] = []
     tdir = ASSETS / "tilesets/mooswiesen"
-    grass = [_grass(100 + k, k) for k in range(4)]
+    grass = [M2.grass_tile(k) for k in range(4)]
     # Atlas: Zeile 0 Gras (4), Zeile 1 Weg (16 Masken), Zeile 2 Wasser (16), Zeile 3 Zaun (16)
     atlas = Image.new("RGBA", (16 * T, 4 * T), TRANSPARENT)
     for k, g in enumerate(grass):
         atlas.alpha_composite(g, (k * T, 0))
     for m in range(16):
-        path = _edge_tile(m, 3, color("bark", 3), color("bark", 2), color("bark", 5),
-                          color("bark", 4), color("moss", 2), 0.07, grass[m % 2])
+        path = _edge_textured(m, 3, M2.path_tile(300 + m), color("moss", 3), color("bark", 3), grass[m % 2])
         atlas.alpha_composite(path, (m * T, T))
-        water = _edge_tile(m, 9, color("sky", 3), color("sky", 2), color("sky", 5),
-                           color("lagoon", 2), color("bark", 2), 0.05, grass[(m + 1) % 2])
+        water = _edge_textured(m, 9, _water_inner(500 + m), color("lagoon", 3), color("sky", 4),
+                               grass[(m + 1) % 2], inset=5)
         atlas.alpha_composite(water, (m * T, 2 * T))
         atlas.alpha_composite(_fence(m), (m * T, 3 * T))
     p = save_png(atlas, tdir / "meadow_tiles.png")
     out.append(GeneratedAsset(p, "tileset", GEN, "Gras(4), Weg/Wasser/Zaun je 16 Kantenmasken"))
-    for name, img, note in (("tree", tree(), "Laubbaum 64x96"), ("bush", bush(), "Busch 32x32"),
-                            ("rock", rock(), "Stein 32x32"), ("flowers", flowers(), "Blumen-Deko 32x32"),
-                            ("fairy_ring", fairy_ring(), "Feenring 64x32")):
+    for name, img, note in (("tree", M2.tree_textured(), "Laubbaum 64x96, Blattballen mit Struktur"),
+                            ("bush", M2._leaf_texture(bush().copy(), 5), "Busch 32x32"),
+                            ("rock", rock(), "Stein 32x32"), ("flowers", M2.flowers(), "Blumeninsel 32x32"),
+                            ("fairy_ring", fairy_ring(), "Feenring 64x32"),
+                            ("tall_grass", _pad32(M2.tall_grass(1)), "Hohes Gras (Deko)"),
+                            ("pebbles", _pad32(M2.pebble_cluster(2)), "Kiesel (Deko)")):
         p = save_png(img, tdir / f"{name}.png")
         out.append(GeneratedAsset(p, "tileset", GEN, note))
     fdir = ASSETS / "sprites/fx"
     for name, img, note in (("shadow_small", shadow(16, 8), "Schatten Fee/Hund"),
                             ("shadow_medium", shadow(24, 8), "Schatten Klio"),
                             ("shadow_large", shadow(48, 16), "Schatten Pferd"),
+                            ("shadow_tree", shadow(56, 16), "Schatten Baum"),
                             ("fx_particles", fx_sheet(), "Partikel 8x8: Funke, Funke groß, Herz, Staub, Licht, Feenstaub"),
                             ("transform_flash", flash(), "Lichtblitz der Verwandlung")):
         p = save_png(img, fdir / f"{name}.png")

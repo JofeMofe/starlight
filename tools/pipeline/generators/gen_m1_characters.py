@@ -1,5 +1,5 @@
-"""M1-Figuren als Spritesheets mit JSON-Metadaten (atlas.py):
-Klio (Körper, lange Haare, Fee, Feenflügel), Pferd Holunder, Seelenhund (Collie-Mix).
+"""M1-Tiere als Spritesheets mit JSON-Metadaten (atlas.py): Pferd Holunder und
+Seelenhund (Collie-Mix). Klio liegt in gen_klio.py.
 """
 from __future__ import annotations
 
@@ -7,7 +7,6 @@ from atlas import Animation, pack
 from sl_common import ASSETS, GeneratedAsset
 from sprites import dog_rig as D
 from sprites import horse_rig as R
-from sprites import klio_sheet as K
 
 GEN = "tools/pipeline/generators/gen_m1_characters.py"
 
@@ -55,16 +54,6 @@ def dog_animations() -> list[Animation]:
 
 def build() -> list[GeneratedAsset]:
     out: list[GeneratedAsset] = []
-    cdir = ASSETS / "sprites/characters"
-    for name, anims, note in (
-        ("klio_body", K.human_animations(), "Klio Menschengröße: Körper/Kopf, idle/walk/ride x 3 Ansichten"),
-        ("klio_hair", K.tail_animations(), "Klio lange Haare, 5 Schwungstufen je Ansicht"),
-        ("klio_fairy", K.fairy_animations(), "Klio Feengröße 16x20"),
-        ("klio_wings", K.wing_animations(), "Feenflügel, 6-Frame-Schleife"),
-    ):
-        png = pack(anims, cdir / f"{name}.png")
-        out.append(GeneratedAsset(png, "sprite", GEN, note))
-        out.append(GeneratedAsset(png.with_suffix(".json"), "sprite-meta", GEN, "Animationsdaten"))
     png = pack(horse_animations(), ASSETS / "sprites/animals/horses/holunder.png")
     out.append(GeneratedAsset(png, "sprite", GEN, "Pferd Holunder (Fuchs, Flachsmähne), Schritt/Trab/Galopp"))
     out.append(GeneratedAsset(png.with_suffix(".json"), "sprite-meta", GEN, "Animationsdaten"))
