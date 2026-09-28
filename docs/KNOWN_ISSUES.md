@@ -5,9 +5,11 @@ Format: **[Bereich] Beschreibung** – Auswirkung – geplante Lösung (Meilenst
 ## Offen
 
 ### Aus M1
-- **[Grafik] Klio ist Prototyp-Qualität** (darf laut M1 so sein): Profil-Brille wirkt bei ×2 etwas
-  schwer; rechts ist nur gespiegelt; keine Signature-Animationen (Brille zurechtschieben, Haare hinters
-  Ohr, Hüpfen), keine Portraits. – Endqualität in M6.
+- **[Grafik] Klio v4 ist noch nicht Endqualität**: rechts ist gespiegelt; keine Signature-Animationen
+  (Brille zurechtschieben, Haare hinters Ohr, Hüpfen), keine Portraits. – Endqualität in M6.
+- **[Recht] Klio ist einer realen Person nachempfunden** (auf Wunsch des Nutzers, nur nach
+  Beschreibung): vor einer öffentlichen Veröffentlichung Einverständnis der Person einholen (§5.1).
+- **[Grafik] Hund von hinten** liest sich schwächer als die anderen Ansichten. – M3.
 - **[Grafik] Pferd und Hund nur 4 Richtungen** (8 empfohlen), Pferd ohne Idle-Varianten (Grasen,
   Wälzen …), Hund ohne Kratzen/Gähnen/Schmetterlinge. – M3.
 - **[Grafik] Teichufer eckig**: Kanten nur per 4er-Nachbarmaske, keine Innen-/Außenecken; Wasser

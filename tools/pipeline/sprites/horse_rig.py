@@ -13,7 +13,7 @@ import math
 from dataclasses import dataclass
 
 from palette import color
-from sprites.rig import Material, Rig, render
+from sprites.rig import Material, Rig, Texture, render
 
 W, H = 96, 64
 GROUND = 61
@@ -24,6 +24,9 @@ MATERIALS_CHESTNUT_FLAXEN = {
     "mane": Material(color("bark", 2), color("bark", 5), color("bark", 6), color("bark", 7)),
     "mane_far": Material(color("bark", 2), color("bark", 4), color("bark", 5), color("bark", 6)),
     "white": Material(color("stone", 3), color("stone", 5), color("dusk", 6), color("dusk", 6)),
+    # Muskelglanz und dunkleres Maul geben Volumen
+    "coat_hi": Material(color("bark", 1), color("bark", 4), color("bark", 5), color("bark", 6)),
+    "muzzle": Material(color("bark", 1), color("bark", 2), color("bark", 3), color("bark", 4)),
     "hoof": Material(color("dusk", 0), color("stone", 1), color("stone", 2), color("stone", 3)),
     "eye": Material(color("dusk", 0), color("dusk", 0), color("dusk", 0), color("dusk", 0)),
     "glint": Material(color("dusk", 6), color("dusk", 6), color("dusk", 6), color("dusk", 6)),
@@ -112,6 +115,12 @@ def side_frame(gait: Gait, i: int, materials: dict[str, Material] = MATERIALS_CH
     hx, hy = 23, 11 + bob + nod
     rig.capsule("coat", g, hx, hy, 12, hy + 10, 5.0, 3.6)       # Kopf
     rig.poly("coat", g, [(hx + 0.5, hy - 4), (hx + 2.5, hy - 9), (hx + 3.5, hy - 3)])  # Ohr
+    # Glanz auf Schulter, Rücken, Hinterhand und Wange (Licht von oben links)
+    rig.ellipse("coat_hi", g, 34, 26 + bob, 4.5, 5.5)
+    rig.ellipse("coat_hi", g, 48, 24 + bob, 11, 2.2)
+    rig.ellipse("coat_hi", g, 62, 23 + bob, 6, 4.5)
+    rig.ellipse("coat_hi", g, hx - 2, hy + 1, 2.5, 2)
+    rig.ellipse("muzzle", g, 13.5, hy + 8, 3.2, 2.8)
     # Blesse
     rig.capsule("white", g, hx - 5, hy + 0.5, 12.5, hy + 8, 1.1, 1.4)
     # Mähne (vorn am Hals) und Stirnschopf
@@ -124,8 +133,30 @@ def side_frame(gait: Gait, i: int, materials: dict[str, Material] = MATERIALS_CH
     # Auge mit Glanz, Nüster
     rig.pixels("eye", 6, [(20, hy + 1), (21, hy + 1), (20, hy + 2), (21, hy + 2)])
     rig.pixels("glint", 6, [(20, hy + 1)])
-    rig.pixels("nostril", 6, [(12, hy + 9)])
-    return render(rig, materials)
+    rig.pixels("nostril", 6, [(12, hy + 8), (11, hy + 9)])
+    return render(rig, materials, textures=_textures(materials))
+
+
+def _textures(materials: dict[str, Material]) -> dict[str, "Texture"]:
+    """Strähnen in Mähne/Schweif, weich ausgefranster Muskelglanz."""
+    def strands(key: str) -> "Texture":
+        m = materials[key]
+
+        def tex(x: int, y: int, col: tuple, edge: bool) -> tuple:
+            if col == m.base and (x + y // 2) % 3 == 0:
+                return m.shadow
+            if col == m.light and (x + y // 2) % 4 == 1:
+                return m.base
+            return col
+        return tex
+
+    coat = materials["coat"]
+
+    def sheen(x: int, y: int, col: tuple, edge: bool) -> tuple:
+        # Randpixel im Schachbrett zurück zur Fellfarbe -> kein harter Fleck
+        return coat.base if edge and (x + y) % 2 == 0 else col
+
+    return {"mane": strands("mane"), "mane_far": strands("mane_far"), "coat_hi": sheen}
 
 
 def front_frame(gait: Gait, i: int, materials: dict[str, Material] = MATERIALS_CHESTNUT_FLAXEN,
@@ -149,6 +180,8 @@ def front_frame(gait: Gait, i: int, materials: dict[str, Material] = MATERIALS_C
         rig.poly("coat_far", 1, [(cx + 1, 9 + bob + nod), (cx + 3, 4 + bob + nod), (cx + 4, 9 + bob + nod)])
         rig.capsule("mane_far", 1, cx, 12 + bob + nod, cx, 24 + bob, 2.0, 2.4)
         rig.ellipse("coat", 3, cx, 32 + bob, 13, 12)
+        rig.ellipse("coat_hi", 3, cx - 5, 26 + bob, 4.5, 3.5)            # Glanz auf der Kruppe
+        rig.ellipse("coat_hi", 3, cx + 5, 26 + bob, 3, 2.5)
         for side, lift in ((-1, lift_l), (1, lift_r)):
             x = cx + side * 6
             rig.capsule("coat", 3, x, 38 + bob, x, 50 + bob - lift, 4.2, 2.6)
@@ -165,13 +198,16 @@ def front_frame(gait: Gait, i: int, materials: dict[str, Material] = MATERIALS_C
             rig.ellipse("hoof", 2, x, 59.5 - lift, 2.5, 1.4)
         rig.ellipse("coat", 3, cx, 33 + bob, 9, 10)                      # Brust
         rig.capsule("coat", 3, cx, 26 + bob, cx, 15 + bob + nod, 5.5, 4.5)    # Hals
+        rig.ellipse("coat_hi", 3, cx - 4, 30 + bob, 3, 4)                # Brustmuskel im Licht
+        rig.ellipse("coat_hi", 3, cx - 2, 20 + bob + nod, 2, 3.5)
         hy = 8 + bob + nod
         rig.capsule("coat", 5, cx, hy, cx, hy + 14, 4.6, 3.4)            # Kopf frontal
         rig.poly("coat", 5, [(cx - 5, hy + 1), (cx - 4, hy - 5), (cx - 2, hy)])
         rig.poly("coat", 5, [(cx + 2, hy), (cx + 4, hy - 5), (cx + 5, hy + 1)])
-        rig.capsule("white", 5, cx, hy + 2, cx, hy + 13, 1.2, 1.6)       # Blesse
+        rig.ellipse("muzzle", 5, cx, hy + 13, 3.2, 2.4)                 # dunkleres Maul
+        rig.capsule("white", 5, cx, hy + 2, cx, hy + 11, 1.2, 1.5)       # Blesse
         rig.capsule("mane", 6, cx, hy - 2, cx + 1, hy + 3, 2.0, 1.4)     # Stirnschopf
         rig.pixels("eye", 7, [(cx - 4, hy + 4), (cx + 3, hy + 4), (cx - 4, hy + 5), (cx + 3, hy + 5)])
         rig.pixels("glint", 7, [(cx - 4, hy + 4), (cx + 3, hy + 4)])
         rig.pixels("nostril", 7, [(cx - 2, hy + 13), (cx + 1, hy + 13)])
-    return render(rig, materials)
+    return render(rig, materials, textures=_textures(materials))

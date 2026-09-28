@@ -14,7 +14,7 @@ const REPATH_INTERVAL: float = 0.25
 const PET_TIME: float = 1.3
 const COME_ARRIVE_DISTANCE: float = 22.0
 ## Sitzplatz der Fee je Ansicht (relativ zu den Pfoten)
-const SEATS: Dictionary = {"side": Vector2(3, -8), "down": Vector2(0, -9), "up": Vector2(0, -8)}
+const SEATS: Dictionary = {"side": Vector2(6, -8), "down": Vector2(0, -9), "up": Vector2(0, -8)}
 
 @export var dog_name: String = "Funke"
 

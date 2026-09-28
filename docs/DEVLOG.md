@@ -4,6 +4,61 @@ Neueste Sitzung oben. Pro Sitzung: was, warum, offene Punkte.
 
 ---
 
+## Sitzung 3 – 2026-09-28 · Grafik-Durchgang nach Nutzer-Feedback (M1-Nachbesserung)
+
+### Anlass
+
+Feedback nach M1: Die Grafik wirke „0815“, flach und austauschbar. Klio soll der Freundin des
+Nutzers nachempfunden sein: dunkelbraune, glatte Haare ohne Pony, dunkelgrüngraue Augen, eckige,
+schmale, schwarze Brille, viel Schwarz und Lila, Jeans statt Rock, Jeansjacke, Converse-artige
+Stoffschuhe, Ringe, Ketten, Ohrstecker, schwarzer Nagellack.
+
+### Was wurde gemacht
+
+- **Klio v4** (`tools/pipeline/sprites/klio_v4.py`, `klio_v4_sheet.py`): komplett neu gezeichnet,
+  handgesetzte Pixelkarten in allen drei Ansichten (vorn, hinten, Profil), Mittelscheitel, Haare über
+  den Schläfen, Glanzband auf dem Hinterkopf, schwarzes Shirt mit eigenem lila Stern-Mond-Emblem,
+  Jeansjacke, Jeans, Stoffschuhe, Ohrstecker, Ringe, Kette. Fee in demselben Look (Brille mit
+  Glanzpixeln statt schwarzem Balken), Flügel in Lila. Idle, Laufen (mit Schrittanhebung und
+  Armschwung im Profil), Reiten.
+- **Wiese v2** (`meadow_v2.py`): Gras mit gestempelten Halmbüscheln, Wegkanten mit Gras-Fransen,
+  texturiertes Wasser, Bäume aus 13 Blattbüscheln, Blumen, hohes Gras, Kiesel; Objektschatten;
+  deterministische Deko-Streuung (`scatter` in den Map-JSONs, `MapBuilder._scatter`).
+- **Pferd**: Muskelglanz an Schulter, Rücken, Hinterhand und Wange (weich ausgefranst), dunkleres
+  Maul, Nüstern, strähnige Mähne und Schweif; Kruppenglanz von hinten, Brustmuskel von vorn.
+- **Hund neu** (`sprites/dog_art.py`): Tricolor-Collie-Mix mit handgesetzten Pixelkarten für Kopf,
+  Rumpf, Rute (vorn, hinten, Seite, Sitzen): Schlappohren, bernsteinfarbene Augen mit Glanzpunkt,
+  lohfarbene Brauen und Wangen, weiße Blesse und Halskrause, lila Halsband mit goldener Marke
+  (passend zu Klio). Die Beine kommen weiter aus dem Rig, die Rute wedelt per Scherung.
+- `rig.render` hat jetzt einen Textur-Haken pro Material und liefert ein beschreibbares Bild.
+- Sitzplatz der Fee auf dem Hund etwas nach hinten auf den Rücken verschoben.
+
+### Entscheidungen
+
+- **Keine echten Bandlogos, Namen oder Bilder realer Künstler** (§7.9, §9): Das Fan-Sein wird über
+  ein eigenes Stern-Mond-Emblem und die Farbwelt Schwarz/Lila ausgedrückt.
+- **Reale Person als Vorbild:** Klio wird nur aus Beschreibungen gestaltet, nicht aus Fotos. Als
+  persönliches Geschenk unproblematisch; vor einer öffentlichen Veröffentlichung braucht es das
+  Einverständnis der dargestellten Person (§5.1).
+- **Hybrid aus Pixelkarte und Rig beim Hund:** Bei 32×24 Pixeln wirkte die rein geometrische Form
+  klobig; von Hand gesetzte Köpfe tragen den Charme, das Rig behält die weichen Beinbewegungen.
+
+### Verifikation
+
+- `tools/run_all_checks.sh` → **ALLES GRÜN**: Assets 0 Fehler, Lint 0 Warnungen, Tests 46/46,
+  Smoke-Bot 7 Tage, M1-Bot OK (Frame-CPU headless Ø 2,4 ms), Windows-Exe unter Wine 60 s und
+  Linux-Build 60 s ohne Fehler.
+- Screenshots: `docs/screenshots/m1/art_pass_*.png` (Klio v1–v4, Wiese, Tiere, Szenen im Spiel).
+  Selbst geprüft: Silhouetten lesbar, Brille in allen Ansichten sichtbar, keine Mixels.
+
+### Offen
+
+- Teichufer noch eckig (Autotiling-Ecken, M2), Rückansicht des Hundes am schwächsten,
+  Pferd weiterhin aus Formen (Palette-Swap-Basis für M3), Portraits und Signature-Animationen (M6).
+- Nutzer-Feedback zum neuen Look abwarten, dann M2 „Die Welt lebt“.
+
+---
+
 ## Sitzung 2 – 2026-09-28 · Meilenstein M1 „Das Gefühl“ ✅
 
 ### Was wurde gemacht

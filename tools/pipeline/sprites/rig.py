@@ -11,12 +11,15 @@ Gruppe und Tiefe. Das Rendering folgt den Styleguide-Regeln:
 from __future__ import annotations
 
 import math
+from collections.abc import Callable
 from dataclasses import dataclass, field
 
 import numpy as np
 from PIL import Image
 
 RGBA = tuple[int, int, int, int]
+# Textur je Material: (x, y, Farbe, liegt_am_Materialrand) -> Farbe
+Texture = Callable[[int, int, RGBA, bool], RGBA]
 
 
 @dataclass
@@ -96,7 +99,8 @@ def _mask(part: Part, w: int, h: int) -> np.ndarray:
     raise ValueError(part.shape)
 
 
-def render(rig: Rig, materials: dict[str, Material], outline: bool = True) -> Image.Image:
+def render(rig: Rig, materials: dict[str, Material], outline: bool = True,
+           textures: dict[str, Texture] | None = None) -> Image.Image:
     w, h = rig.width, rig.height
     part_id = np.full((h, w), -1, dtype=int)
     for i, part in enumerate(rig.parts):
@@ -124,6 +128,14 @@ def render(rig: Rig, materials: dict[str, Material], outline: bool = True) -> Im
                     col = mat.shadow
                 elif gat(x - 1, y) != g or gat(x, y - 1) != g:
                     col = mat.light
+            if textures and part.material in textures:
+                edge = False
+                for nx, ny in ((x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)):
+                    npid = part_id[ny, nx] if 0 <= nx < w and 0 <= ny < h else -1
+                    if npid < 0 or rig.parts[npid].material != part.material:
+                        edge = True
+                        break
+                col = textures[part.material](x, y, col, edge)
             out[y, x] = col
     if outline:
         opaque = part_id >= 0
@@ -146,4 +158,4 @@ def render(rig: Rig, materials: dict[str, Material], outline: bool = True) -> Im
                         result[y, x] = materials[rig.parts[part_id[ny, nx]].material].outline
                         break
         out = result
-    return Image.fromarray(out, "RGBA")
+    return Image.fromarray(out, "RGBA").copy()  # beschreibbar für Nachbearbeitung
