@@ -4,6 +4,27 @@ Format: **[Bereich] Beschreibung** – Auswirkung – geplante Lösung (Meilenst
 
 ## Offen
 
+### Aus M1
+- **[Grafik] Klio ist Prototyp-Qualität** (darf laut M1 so sein): Profil-Brille wirkt bei ×2 etwas
+  schwer; rechts ist nur gespiegelt; keine Signature-Animationen (Brille zurechtschieben, Haare hinters
+  Ohr, Hüpfen), keine Portraits. – Endqualität in M6.
+- **[Grafik] Pferd und Hund nur 4 Richtungen** (8 empfohlen), Pferd ohne Idle-Varianten (Grasen,
+  Wälzen …), Hund ohne Kratzen/Gähnen/Schmetterlinge. – M3.
+- **[Grafik] Teichufer eckig**: Kanten nur per 4er-Nachbarmaske, keine Innen-/Außenecken; Wasser
+  nicht animiert. – Echtes Autotiling mit Terrain-Sets in M2.
+- **[Audio] Hund- und Pferdelaute sind synthetisch und stilisiert** (Bellen, Schnauben); ich kann sie
+  nicht selbst anhören. – Durch CC0-Aufnahmen oder bessere Synthese ersetzen (M3), Nutzer-Feedback erbeten.
+- **[Mechanik] Fee sinkt nicht automatisch über hohen Objekten ab** (§6.1): Bäume/Steine blockieren
+  die Fee stattdessen einfach. – Prüfen, ob das Absinken spielerisch nötig ist (M2/M6).
+- **[Mechanik] Reiten in der Ansicht von vorn**: Klio sitzt hinter dem Pferdekopf, der Oberkörper
+  ragt darüber – bewusst so, wirkt aber noch nicht ganz stimmig. – Eigene Reiter-Frames in M3.
+- **[Eingabe] Gamepad nicht auf echter Hardware getestet** (Container hat keins). Belegung ist
+  vollständig, Analogstick wird stufenlos ausgewertet.
+- **[Test] Bildrate im Fenster nicht messbar**: Die Cloud-Maschine rendert per Software (llvmpipe);
+  gemessen wurde die Spiel-Logik headless (Ø 2,7 ms). Echte FPS: im Spiel F3.
+
+### Aus M0
+
 - **[Grafik] Platzhalter-Grastile** (`assets/tilesets/mooswiesen/placeholder_grass.png`): wirkt beim
   Kacheln diagonal gemustert. – Nur Testszene. – Ersetzt durch echtes Mooswiesen-Tileset mit
   Varianten und Autotiling (M2).

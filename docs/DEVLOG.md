@@ -4,6 +4,66 @@ Neueste Sitzung oben. Pro Sitzung: was, warum, offene Punkte.
 
 ---
 
+## Sitzung 2 – 2026-09-28 · Meilenstein M1 „Das Gefühl“ ✅
+
+### Was wurde gemacht
+
+1. **Klio als Pixel-Figur** (handgesetzte Pixelkarten, `tools/pipeline/sprites/klio_art.py`):
+   Menschengröße 32×48 in drei Ansichten mit getrennten Ebenen für Kopf/Körper und lange Haare,
+   Laufzyklus (8 Frames), Stehen mit Atmen und Blinzeln, Reitpose; Feengröße 16×20 mit 1-px-Brille,
+   Blütenkranz und separater Flügelschleife. Jede Version visuell geprüft und nachgebessert
+   (Brille wirkte zuerst wie eine Sonnenbrille, Fee-Gesicht wie eine Maske, Seitenansicht streifig).
+2. **Tier-Rig** (`sprites/rig.py`): Tiere aus Formen mit automatischer Schattierung (Licht oben
+   links), farbiger Außenlinie und Trennlinien. Pferd Holunder (Schritt/Trab/Galopp über
+   Beinphasen: Vier-, Zwei-, Dreitakt) und Collie-Mix (Laufen, Rennen, Sitzen) in drei Ansichten.
+3. **Wiese**: Kachelatlas mit Gras-Varianten und je 16 Kantenmasken für Weg, Wasser, Zaun; Baum,
+   Busch, Stein, Blumen, Feenring; Partikel, Schatten, HUD-Symbole.
+4. **Synthesizer + 18 Soundeffekte** (`tools/pipeline/audio/synth.py`), bitgenau reproduzierbar.
+5. **Spielmechanik** (siehe GDD §2a/2b): Zustandsmaschine für Klio, Größenwechsel mit vollem
+   Effekt und Regeln, Fliegen über niedrige Hindernisse, Seelenhund (Folgen per Navigation, Rufen,
+   Streicheln, Reiten als Fee), Pferd (Pfeifen, Streicheln, Reiten mit drei Gangarten, Wendekreis,
+   Sprung), Haar-Feder, Pixel-Kamera, HUD mit Kontexthinweisen und Hilfe.
+6. **MapBuilder**: Karte und Kachelsatz komplett aus JSON (ASCII-Raster), Navigationsnetz zur Laufzeit.
+7. **Tests**: 46 Unit-/Integrationstests (9 neu), M1-Bot mit 22 Prüfungen und CPU-Messung, in
+   `run_all_checks` eingebunden. Physik-Interpolation für Bildschirme über 60 Hz.
+
+### Entscheidungen
+
+- **Kamera-„Zoom-Puls“ als 1-px-Stoß** statt echtem Zoom: Nicht-ganzzahliger Zoom erzeugt Mixels (§8.4).
+- **Verwandlungseffekt ohne Skalierung**: Flackern zwischen beiden Gestalten, Blitz, Funkenwirbel –
+  alles pixelgenau.
+- **Prototyp in Kapitel 2**: Größenwechsel überall (5 Feenglanz), am Feenring gratis; die
+  Kapitel-1-Regel „nur am Ring“ ist implementiert und getestet.
+- **Pferdesteuerung**: Leertaste antippen = eine Gangart schneller, Richtung loslassen = sanft
+  langsamer werden, im Galopp springen. Sprung nur bei freier Landestelle (keine Frustration).
+- **Leertaste am Pferd = Aufsteigen** (sekundäre Aktion), E = Streicheln: beide gleichzeitig
+  angezeigt. Als Fee am Hund ist E = Aufsitzen (§6.1).
+- **Physik-Interpolation an**: sonst ruckelt 60-Hz-Physik auf 144-Hz-Monitoren.
+- **Navigationsradius 13 px**: mit 8 px blieb das Pferd an den Torpfosten hängen.
+- **Tiles zur Laufzeit aus JSON statt .tres**: Ich arbeite ohne Editor; ASCII-Karten sind für mich
+  der zuverlässigste Weg, und neue Karten brauchen keinen Code.
+
+### Verifikation
+
+- `tools/run_all_checks.sh` → ALLES GRÜN: Assets 0 Fehler (24 PNGs, 52 Manifest-Einträge), Lint 0,
+  Tests 46/46, Smoke-Bot 7 Tage, **M1-Bot OK** (Laufen/Bremsen, Verwandlung mit Kosten, Hecke zu
+  Fuß blockiert und fliegend überquert, Verwandlung ohne Platz abgelehnt, Hund reiten schneller
+  als Fliegen, Feenring gratis, Pferd Schritt→Trab→Galopp→Halt, Absteigen, Pfiff, Zuruf, Streicheln),
+  Windows-Exe unter Wine 60 s, Linux-Build 60 s.
+- CPU-Zeit (Skripte + Physik, headless, ohne Ladephase): Ø 2,6–2,8 ms, 95 % < 5 ms, max. 6,3 ms
+  (Ziel < 8 ms). Im Fenster nicht aussagekräftig messbar (Software-Rendering).
+- Screenshots `docs/screenshots/m1/` (11 Bilder vom Bot). Befunde daraus behoben: Meldung wurde von
+  der Hilfe verdeckt, Pferd blieb am Tor hängen.
+
+### Offen / nächste Schritte (M2 „Die Welt lebt“)
+
+- Echte Tilesets mit Terrain-Autotiling, Baumhaus-Innenraum, Tag-Nacht-Farbrampe, Licht und
+  Normal Maps, Wetter, Wind-/Gras-Shader, Überhang-Transparenz, Zeit im Spiel, Schlafen,
+  Speicher-Slots im Menü, HUD-Uhr, Pausemenü, Einstellungen.
+- Feedback aus dem Nutzertest von M1 (Gefühl, Geräusche) einarbeiten.
+
+---
+
 ## Sitzung 1 – 2026-09-28 · Meilenstein M0 „Fundament“ ✅
 
 ### Umgebung (Abweichungen zu §2)

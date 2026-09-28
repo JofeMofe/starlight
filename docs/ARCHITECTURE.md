@@ -1,6 +1,6 @@
 # Starlight – Architektur
 
-Stand: M0 (Fundament). Wird mit jedem Meilenstein fortgeschrieben.
+Stand: M1 (Das Gefühl). Wird mit jedem Meilenstein fortgeschrieben.
 
 ## 1. Engine & Projekteinstellungen
 
@@ -12,7 +12,7 @@ Stand: M0 (Fundament). Wird mit jedem Meilenstein fortgeschrieben.
 | Stretch | `viewport` / `keep` / `integer` | pixelgenaue Integer-Skalierung (×2 bei 720p, ×3 bei 1080p, ×4 bei 1440p, ×6 bei 4K) |
 | Texturfilter | Nearest | keine Unschärfe |
 | Pixel-Snap | Transforms + Vertices | kein Subpixel-Zittern |
-| Physik | 60 Ticks | §4.1 |
+| Physik | 60 Ticks, **Physik-Interpolation an** | §4.1; Interpolation hält Bewegung auf 90/120/144-Hz-Bildschirmen ruckelfrei. Teleports brauchen `reset_physics_interpolation()`; die Kamera läuft im Physik-Takt. |
 | GDScript-Warnungen | `untyped_declaration` = Fehler; unsichere Property-/Methodenzugriffe = Warnung | erzwingt statische Typisierung (§1.9). `unsafe_cast` und `unsafe_call_argument` sind aus, weil JSON-Daten zwangsläufig als Variant ankommen und explizit per `int()`/`as` gewandelt werden. |
 | Fenster | 1280 × 720 Startgröße | ×2-Skalierung als angenehmer Start |
 
@@ -79,6 +79,7 @@ Werkzeug benutzen **RB** bzw. linke Maustaste, Inventar **Tab/Menu(Start)**, Pau
 | Unit | `tests/unit/` | gdUnit4 5.0.5 |
 | Integration | `tests/integration/` | gdUnit4: alle Szenen instanziierbar, Referenzen, Übersetzungen DE/EN, JSON gültig, Projekteinstellungen |
 | Smoke | `tests/smoke/smoke_run.tscn` | Bot spielt 7 Tage, Autosave-Rundreise, Szenenwechsel |
+| M1-Bot | `tests/smoke/m1_bot.tscn` | spielt die Kernmechanik mit simulierten Tasten durch (22 Prüfungen), misst CPU-Zeit pro Frame; `-- --shots=ORDNER` erzeugt QA-Screenshots |
 | Lint | `tools/lint/lint_gdscript.py` | lädt jedes Skript im Debug-Modus neu, jede Analyzer-Warnung = Fehler |
 | Assets | `tools/pipeline/build_assets.py` | Palette, Maße, Lizenzen/Manifest |
 | Export | `run_all_checks` | Windows-Export + 60-s-Lauf mit `--smoke` (unter Linux via Wine) |
@@ -92,3 +93,31 @@ Version `0.<meilenstein>.<build>`) und „Linux“ (x86_64, Steam Deck).
 Icon und Versionsinfo schreibt Godot 4.4 über **rcedit** in die Exe (`tools/setup_tools.sh`
 lädt es und trägt es in die Editor-Einstellungen ein; unter Linux läuft rcedit über Wine und
 muss mit UTF-8-Locale gestartet werden, sonst werden „–“/„©“ zerstört).
+
+## 8. Gameplay-Bausteine (ab M1)
+
+| Baustein | Ort | Zweck |
+|---|---|---|
+| `StateMachine` | `scripts/systems/state_machine.gd` | schlanke Zustandsmaschine (Callables für enter/update/exit, Zeit im Zustand) |
+| `SheetAnimator` | `scripts/components/sheet_animator.gd` | spielt Pipeline-Spritesheets anhand der JSON (Frame-Dauern, `bob`), Phase beim Richtungswechsel behalten, feste Frames für Code-gesteuerte Ebenen |
+| `Interactable` | `scripts/components/interactable.gd` | Area2D auf Ebene „interact“; Besitzer liefert Hinweise per `prompt_provider`, primäre (E) und sekundäre (Leertaste) Aktion |
+| `PixelCamera` | `scripts/components/pixel_camera.gd` | pixelfeste Kamera mit Vorausblick, 1-px-Puls, Kartengrenzen |
+| `MapBuilder` | `scripts/systems/map_builder.gd` | Karte aus JSON: Kachelsatz zur Laufzeit (TileSet + Kollisionen), Kantenmasken, Objekte, Randwände, Startpunkte |
+| `FlightEnergy`, `SizeChangeRules`, `HorseGait` | `scripts/systems/` | reine, unit-getestete Spiellogik |
+| `MovementConfig` | `scripts/data_types/` + `data/config/movement.tres` | alle Bewegungswerte |
+| `PhysicsLayers` | `scripts/util/physics_layers.gd` | Kollisionsebenen: 1 hoch, 2 niedrig (Fee überfliegt), 3 Spielerin, 4 Tiere, 5 Interaktion |
+
+**Szenen:** `scenes/player/klio.tscn` (Körper-, Haar-, Feen- und Flügelebene, Partikel, Sensor),
+`scenes/animals/dog.tscn`, `horse.tscn` (je mit NavigationAgent2D, Interactable, Partikel),
+`scenes/world/test_meadow.tscn` (NavigationRegion2D → Boden, Deko, y-sortierte Welt mit
+Zaun-TileMapLayer und Figuren), `scenes/ui/hud.tscn`.
+
+**Reiten:** Das Reittier bewegt sich und ruft danach `Klio.sync_to_mount()` auf (keine
+Verzögerung um einen Frame). Klio liegt 1 px vor bzw. hinter dem Tier in der Y-Sortierung
+(in der Ansicht von vorn sitzt sie hinter dem Pferdekopf).
+
+**Navigation:** Das Navigationsnetz wird nach dem Kartenaufbau aus allen statischen Kollisionen
+(hoch + niedrig) mit 13 px Agentenradius gebacken, damit auch das Pferd nicht an Zaunecken hängt.
+
+**Sprites:** Füße liegen auf dem Knotenursprung (Y-Sortierung nach Fußpunkt). Figuren werden nie
+skaliert; Richtungswechsel links/rechts per `flip_h`.

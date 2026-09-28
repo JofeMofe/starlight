@@ -3,8 +3,8 @@
 Ein cozy 2D-Pixel-Art-Lebenssimulationsspiel im verwunschenen Glimmertal. Klio wird zur Fee,
 wechselt ihre Größe und schenkt vernachlässigten Pferden und Hunden Liebe.
 
-**Stand:** Meilenstein M0 – Fundament (Version 0.0.1). Spielbar ist eine Testszene; die
-eigentliche Spielmechanik beginnt mit M1. Fortschritt: `docs/DEVLOG.md`.
+**Stand:** Meilenstein M1 – Das Gefühl (Version 0.1.1). Spielbar ist eine Test-Wiese mit Klio
+(Mensch und Fee), ihrem Hund und dem Pferd Holunder. Fortschritt: `docs/DEVLOG.md`.
 
 ## Starten
 
@@ -33,12 +33,17 @@ Voraussetzungen für die Asset-Pipeline: Python 3.11+ mit `pillow` und `numpy`.
 | `--scene=res://…` | andere Startszene |
 | `--screenshot=PFAD` / `--screenshot-delay=N` | Screenshot in voller Integer-Auflösung, dann Ende |
 
-## Steuerung (Testszene M0)
+## Steuerung (Test-Wiese M1)
 
-| Taste | Wirkung |
+| Taste (Gamepad) | Wirkung |
 |---|---|
-| F2 | Sprache Deutsch ↔ Englisch |
-| F12 | Screenshot nach `user://screenshots/` |
+| WASD / Pfeile (linker Stick) | Laufen, Fliegen, Reiten lenken |
+| Q (Y) | Größe wechseln (am Feenring gratis, sonst 5 Feenglanz) |
+| Leertaste (B) halten | als Fee fliegen – über Zäune, Büsche, Wasser |
+| E (A) | Streicheln · als Fee auf den Hund · absteigen · am Feenring verwandeln |
+| Leertaste (B) am Pferd | aufsteigen; beim Reiten antippen = schneller, im Galopp = springen |
+| F (X) · R (LB) | Hund rufen · Pferd herpfeifen |
+| F1 · F3 | Hilfe ein/aus · Bildrate |
 
 Vollständige Belegung: `docs/GDD.md` §6.
 
