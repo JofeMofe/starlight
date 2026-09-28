@@ -24,6 +24,6 @@ Format: **[Bereich] Beschreibung** – Auswirkung – geplante Lösung (Meilenst
 
 ## Erledigt
 
-- **[Umgebung] Windows-Build nur unter Wine getestet** – 2026-09-28 von der Projektinhaberin auf echtem
+- **[Umgebung] Windows-Build nur unter Wine getestet** – 2026-09-28 im Nutzertest auf echtem
   Windows bestätigt: Start, Schärfe, Sprachwechsel (F2), Integer-Skalierung im maximierten Fenster,
   Screenshot (F12) und Programm-Infos funktionieren.
