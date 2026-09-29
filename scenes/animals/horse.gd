@@ -16,7 +16,7 @@ const SFX_HOOVES: Array[AudioStream] = [
 const HOOF_FRAMES: Dictionary = {"walk": [0, 2, 4, 6], "trot": [0, 4], "canter": [0, 3, 5]}
 const GAIT_KEYS: Array[String] = ["", "gait.walk", "gait.trot", "gait.canter"]
 ## Sitzplatz des Reiters (relativ zu den Hufen) je Ansicht
-const SEATS: Dictionary = {"side": Vector2(-3, -22), "down": Vector2(0, -21), "up": Vector2(0, -19)}
+const SEATS: Dictionary = {"side": Vector2(3, -17), "down": Vector2(0, -21), "up": Vector2(0, -17)}
 const JUMP_PROBE: Vector2 = Vector2(28, 10)
 const PET_TIME: float = 1.4
 ## Hufe liegen im 96x64-Frame auf Zeile 61 -> Sprite so versetzen, dass sie auf dem Ursprung stehen

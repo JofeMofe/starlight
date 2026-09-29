@@ -197,10 +197,11 @@ def front_frame(gait: Gait, i: int, materials: dict[str, Material] = MATERIALS_C
             rig.capsule("coat", 2, x, 50 + bob - lift, x, 58 - lift, 2.2, 1.9)
             rig.ellipse("hoof", 2, x, 59.5 - lift, 2.5, 1.4)
         rig.ellipse("coat", 3, cx, 33 + bob, 9, 10)                      # Brust
-        rig.capsule("coat", 3, cx, 26 + bob, cx, 15 + bob + nod, 5.5, 4.5)    # Hals
+        rig.capsule("coat", 3, cx, 26 + bob, cx, 22 + bob + nod, 5.5, 5.0)    # Hals
         rig.ellipse("coat_hi", 3, cx - 4, 30 + bob, 3, 4)                # Brustmuskel im Licht
-        rig.ellipse("coat_hi", 3, cx - 2, 20 + bob + nod, 2, 3.5)
-        hy = 8 + bob + nod
+        rig.ellipse("coat_hi", 3, cx - 3, 24 + bob + nod, 1.5, 2)
+        # Kopf etwas gesenkt, damit das Gesicht der Reiterin darüber sichtbar bleibt
+        hy = 17 + bob + nod
         rig.capsule("coat", 5, cx, hy, cx, hy + 14, 4.6, 3.4)            # Kopf frontal
         rig.poly("coat", 5, [(cx - 5, hy + 1), (cx - 4, hy - 5), (cx - 2, hy)])
         rig.poly("coat", 5, [(cx + 2, hy), (cx + 4, hy - 5), (cx + 5, hy + 1)])

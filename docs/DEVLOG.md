@@ -4,6 +4,53 @@ Neueste Sitzung oben. Pro Sitzung: was, warum, offene Punkte.
 
 ---
 
+## Sitzung 4 – 2026-09-29 · Klio aus frei lizenzierten Vorlagen (LPC)
+
+### Anlass
+
+Feedback zu Klio v4 und dem neuen Hund: Beim Reiten fehlten die Beine, die Fee wirkte wie ein
+Gnom, der Hund „derpy“ und kaum als Hund erkennbar, das Profil nicht hübsch. Wunsch des Nutzers:
+Vorlagen aus dem Netz verwenden und sich daran orientieren.
+
+### Was wurde gemacht
+
+- **Quelle:** [Universal LPC Spritesheet Character Generator](https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator)
+  (Liberated Pixel Cup). Jede Datei hat dort eigene Lizenzangaben; verwendet werden nur Teile, die
+  wahlweise unter **OGA-BY 3.0** oder **CC0** stehen (§9: Namensnennung, kein Share-Alike).
+  Originale unter `tools/pipeline/vendor/lpc/`, Zuordnung Datei → Autor:innen → Lizenz in
+  `vendor/lpc/CREDITS.csv`, Lizenztext `docs/licenses/OGA-BY-3.0.txt`, Namensnennung in `CREDITS.md`.
+- **Klio** (`sprites/klio_lpc.py`, `generators/gen_klio.py`): weiblicher Körper, Frisur „xlong“
+  (lang, glatt, Mittelscheitel, kein Pony), Brille, T-Shirt, Strickjacke als offene Jeansjacke,
+  Hose, Schuhe, Kette, Ohrstecker. Automatisch auf die Master-Palette umgefärbt (Haare dunkelbraun,
+  Augen dunkelgrüngrau, Shirt schwarz, Jacke hell-, Hose dunkelblau, Brille schwarz mit
+  durchsichtigen Gläsern). Im Profil wird eine dünne Strähne vor dem Körper entfernt.
+  Frames 64×64 (LPC-Standard), Laufzyklus 8 Frames, Stehen 2 Frames, Reiten = LPC-Sitzpose.
+- **Fee:** dieselbe Figur auf halbe Größe verkleinert (Umrisse bleiben erhalten), Brille und
+  Augen von Hand gesetzt → erwachsene, schlanke Proportionen statt Kopffüßer. Neue libellenartige
+  Flügel (zwei schlanke Paare, lila/hellblau, leicht transparent). Frames 32×32.
+- Spielszene: Sprite-Offsets und Sitzpunkte auf dem Pferd an die neuen Maße angepasst.
+- Alte handgezeichnete Klio-Module (v1–v4) entfernt (bleiben in der Git-Historie).
+- `check_licenses.py` erlaubt jetzt zusätzlich OGA-BY-3.0; `GeneratedAsset` kann Lizenz,
+  Autor:innen und „modifiziert“ für abgeleitete Assets angeben.
+
+### Entscheidungen
+
+- **LPC statt Eigenbau:** Der LPC-Stil ist erprobt, hat genau unseren Maßstab (32er-Kacheln,
+  ca. 48 px große Figuren) und bietet Laufzyklen in vier Richtungen. Die Anpassung an Palette
+  und Klios Merkmale läuft reproduzierbar über die Pipeline.
+- **Haare im Körper-Sheet:** LPC zeichnet das Haar-Wippen beim Laufen bereits in jeden Frame.
+  Die separate Haar-Ebene bleibt als leeres Sheet bestehen, damit Szene und Code gleich bleiben.
+- **Fee 32×32 statt 16×20:** Mit 16×20 ließen sich nur Chibi-Proportionen darstellen (Feedback
+  „Gnom“). Die Figur selbst ist ca. 12×24 px groß, die Flügel brauchen den Rest.
+
+### Netzwerk
+
+opengameart.org, itch.io und kenney.nl sind in dieser Cloud-Umgebung per Richtlinie gesperrt.
+Die passenden LPC-Pferde, -Reitposen und -Hunde liegen auf opengameart.org → Nutzer gebeten,
+die Domain freizugeben. Bis dahin bleiben Pferd und Hund die bisherigen Eigenbauten.
+
+---
+
 ## Sitzung 3 – 2026-09-28 · Grafik-Durchgang nach Nutzer-Feedback (M1-Nachbesserung)
 
 ### Anlass

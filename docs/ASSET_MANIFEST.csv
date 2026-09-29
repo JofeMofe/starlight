@@ -27,13 +27,13 @@ assets/sprites/animals/dogs/collie_mix.png,sprite,tools/pipeline/generators/gen_
 assets/sprites/animals/horses/holunder.json,sprite-meta,tools/pipeline/generators/gen_m1_characters.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Animationsdaten
 assets/sprites/animals/horses/holunder.png,sprite,tools/pipeline/generators/gen_m1_characters.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"Pferd Holunder (Fuchs, Flachsmähne), Schritt/Trab/Galopp"
 assets/sprites/characters/klio_body.json,sprite-meta,tools/pipeline/generators/gen_klio.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Animationsdaten
-assets/sprites/characters/klio_body.png,sprite,tools/pipeline/generators/gen_klio.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Klio v4 Menschengröße: idle/walk/ride x 3 Ansichten
+assets/sprites/characters/klio_body.png,sprite,tools/pipeline/generators/gen_klio.py,LPC-Autor:innen (siehe vendor/lpc/CREDITS.csv); Starlight-Projekt,OGA-BY-3.0,docs/licenses/OGA-BY-3.0.txt,2026-09-29,ja,"Klio Menschengröße: idle/walk/ride x 3 Ansichten; abgeleitet aus LPC-Vorlagen (tools/pipeline/vendor/lpc/CREDITS.csv), umgefärbt und angepasst"
 assets/sprites/characters/klio_fairy.json,sprite-meta,tools/pipeline/generators/gen_klio.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Animationsdaten
-assets/sprites/characters/klio_fairy.png,sprite,tools/pipeline/generators/gen_klio.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Klio v4 Feengröße 16x20
+assets/sprites/characters/klio_fairy.png,sprite,tools/pipeline/generators/gen_klio.py,LPC-Autor:innen (siehe vendor/lpc/CREDITS.csv); Starlight-Projekt,OGA-BY-3.0,docs/licenses/OGA-BY-3.0.txt,2026-09-29,ja,"Klio Feengröße 32x32; abgeleitet aus LPC-Vorlagen (tools/pipeline/vendor/lpc/CREDITS.csv), umgefärbt und angepasst"
 assets/sprites/characters/klio_hair.json,sprite-meta,tools/pipeline/generators/gen_klio.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Animationsdaten
-assets/sprites/characters/klio_hair.png,sprite,tools/pipeline/generators/gen_klio.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"Klio v4 lange Haare, 5 Schwungstufen je Ansicht"
+assets/sprites/characters/klio_hair.png,sprite,tools/pipeline/generators/gen_klio.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"Haar-Ebene (leer, Haare sind in klio_body enthalten)"
 assets/sprites/characters/klio_wings.json,sprite-meta,tools/pipeline/generators/gen_klio.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Animationsdaten
-assets/sprites/characters/klio_wings.png,sprite,tools/pipeline/generators/gen_klio.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"Feenflügel lila, 6-Frame-Schleife"
+assets/sprites/characters/klio_wings.png,sprite,tools/pipeline/generators/gen_klio.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"Libellenflügel lila/hellblau, 6-Frame-Schleife"
 assets/sprites/fx/fx_particles.png,sprite,tools/pipeline/generators/gen_m1_world.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,"Partikel 8x8: Funke, Funke groß, Herz, Staub, Licht, Feenstaub"
 assets/sprites/fx/shadow_large.png,sprite,tools/pipeline/generators/gen_m1_world.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Schatten Pferd
 assets/sprites/fx/shadow_medium.png,sprite,tools/pipeline/generators/gen_m1_world.py,Starlight-Projekt (prozedural generiert),MIT,LICENSE,-,nein,Schatten Klio

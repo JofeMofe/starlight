@@ -46,15 +46,15 @@ texture = ExtResource("2_shadow")
 
 [node name="Body" type="Sprite2D" parent="Visual/Human"]
 texture = ExtResource("3_body")
-offset = Vector2(0, -24)
+offset = Vector2(0, -30)
 region_enabled = true
-region_rect = Rect2(0, 0, 32, 48)
+region_rect = Rect2(0, 0, 64, 64)
 
 [node name="Tail" type="Sprite2D" parent="Visual/Human"]
 texture = ExtResource("4_hair")
-offset = Vector2(0, -24)
+offset = Vector2(0, -30)
 region_enabled = true
-region_rect = Rect2(0, 0, 32, 48)
+region_rect = Rect2(0, 0, 64, 64)
 
 [node name="BodyAnim" type="Node" parent="Visual/Human" node_paths=PackedStringArray("sprite")]
 script = ExtResource("9_anim")
@@ -73,15 +73,16 @@ visible = false
 
 [node name="Wings" type="Sprite2D" parent="Visual/Fairy"]
 texture = ExtResource("6_wings")
-offset = Vector2(0, -10)
+offset = Vector2(0, -18)
+modulate = Color(1, 1, 1, 0.85)
 region_enabled = true
-region_rect = Rect2(0, 0, 16, 20)
+region_rect = Rect2(0, 0, 32, 32)
 
 [node name="FairyBody" type="Sprite2D" parent="Visual/Fairy"]
 texture = ExtResource("5_fairy")
-offset = Vector2(0, -10)
+offset = Vector2(0, -18)
 region_enabled = true
-region_rect = Rect2(0, 0, 16, 20)
+region_rect = Rect2(0, 0, 32, 32)
 
 [node name="FairyAnim" type="Node" parent="Visual/Fairy" node_paths=PackedStringArray("sprite")]
 script = ExtResource("9_anim")

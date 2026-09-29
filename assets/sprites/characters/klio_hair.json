@@ -1,7 +1,7 @@
 {
   "frame_size": [
-    32,
-    48
+    64,
+    64
   ],
   "animations": {
     "tail_down": {

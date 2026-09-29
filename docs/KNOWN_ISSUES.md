@@ -5,11 +5,16 @@ Format: **[Bereich] Beschreibung** – Auswirkung – geplante Lösung (Meilenst
 ## Offen
 
 ### Aus M1
-- **[Grafik] Klio v4 ist noch nicht Endqualität**: rechts ist gespiegelt; keine Signature-Animationen
-  (Brille zurechtschieben, Haare hinters Ohr, Hüpfen), keine Portraits. – Endqualität in M6.
+- **[Grafik] Klio basiert auf LPC-Vorlagen**: Stil der Vorlagen, noch ohne Signature-Animationen
+  (Brille zurechtschieben, Haare hinters Ohr, Hüpfen), ohne Portraits und ohne Blinzeln; die Brille
+  ist rundlich statt eckig. Reiten nutzt die LPC-Sitzpose (Beine nach vorn), nicht eine echte
+  Reitpose. – LPC-Reitposen (opengameart.org, derzeit gesperrt) bzw. eigene Frames, M3/M6.
+- **[Netzwerk] opengameart.org, itch.io, kenney.nl gesperrt** (Umgebungsrichtlinie). Pferd und
+  Hund bleiben Eigenbauten, bis LPC-Pferde/-Hunde geladen werden können. – Nutzer um Freigabe gebeten.
 - **[Recht] Klio ist einer realen Person nachempfunden** (auf Wunsch des Nutzers, nur nach
   Beschreibung): vor einer öffentlichen Veröffentlichung Einverständnis der Person einholen (§5.1).
-- **[Grafik] Hund von hinten** liest sich schwächer als die anderen Ansichten. – M3.
+- **[Grafik] Hund wirkt unbeholfen** (Nutzer-Feedback „derpy“). – Ersatz durch LPC-Hund, sobald
+  opengameart.org erreichbar ist.
 - **[Grafik] Pferd und Hund nur 4 Richtungen** (8 empfohlen), Pferd ohne Idle-Varianten (Grasen,
   Wälzen …), Hund ohne Kratzen/Gähnen/Schmetterlinge. – M3.
 - **[Grafik] Teichufer eckig**: Kanten nur per 4er-Nachbarmaske, keine Innen-/Außenecken; Wasser

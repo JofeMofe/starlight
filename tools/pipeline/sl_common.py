@@ -29,17 +29,22 @@ class GeneratedAsset:
     typ: str
     generator: str
     note: str = ""
+    # Für Assets, die aus fremden Vorlagen abgeleitet sind (§9)
+    license: str = "MIT"
+    license_url: str = "LICENSE"
+    author: str = GENERATED_AUTHOR
+    modified: bool = False
 
     def manifest_row(self) -> dict[str, str]:
         return {
             "pfad": rel(self.path),
             "typ": self.typ,
             "quelle_url": self.generator,
-            "autor": GENERATED_AUTHOR,
-            "lizenz": "MIT",
-            "lizenz_url": "LICENSE",
-            "abruf_datum": "-",
-            "modifiziert": "nein",
+            "autor": self.author,
+            "lizenz": self.license,
+            "lizenz_url": self.license_url,
+            "abruf_datum": "-" if self.license == "MIT" else "2026-09-29",
+            "modifiziert": "ja" if self.modified else "nein",
             "notiz": self.note,
         }
 
