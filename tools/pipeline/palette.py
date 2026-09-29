@@ -37,6 +37,17 @@ RAMPS: dict[str, list[str]] = {
 }
 
 
+# Endesga 32 (Lospec, frei verwendbar): Grundpalette von Sunnyside World und damit
+# seit dem Stilwechsel 2026-09-29 die Palette für Klio, Tiere und neue Grafiken.
+# #ffffff ist ausgenommen (kein reines Weiß in Sprites).
+ENDESGA32: list[str] = [
+    "be4a2f", "d77643", "ead4aa", "e4a672", "b86f50", "733e39", "3e2731", "a22633",
+    "e43b44", "f77622", "feae34", "fee761", "63c74d", "3e8948", "265c42", "193c3e",
+    "124e89", "0099db", "2ce8f5", "c0cbdc", "8b9bb4", "5a6988", "3a4466", "262b44",
+    "181425", "ff0044", "68386c", "b55088", "f6757a", "e8b796", "c28569",
+]
+
+
 def palette_hex() -> list[str]:
     """Alle Farben als Hex-Strings (ohne '#') in Indexreihenfolge."""
     out: list[str] = []

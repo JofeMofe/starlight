@@ -4,6 +4,8 @@ extends Node
 ## Screenshots für die visuelle QA (nur mit Fenster, nicht headless).
 ## Ergebnis: "M1_BOT OK" und Exit-Code 0, sonst Liste der Fehler und Code 1.
 
+## Kachelgröße der Test-Wiese (data/tilesets/meadow.json)
+const T: int = 16
 const MEADOW: PackedScene = preload("res://scenes/world/test_meadow.tscn")
 const CONFIG: MovementConfig = preload("res://data/config/movement.tres")
 const WARMUP_FRAMES: int = 60
@@ -39,7 +41,7 @@ func _run() -> void:
 	# --- Laufen: Beschleunigung und Endtempo --------------------------------
 	var start: Vector2 = _klio.global_position
 	await _hold(&"move_right", 0.6)
-	_check(_klio.global_position.x - start.x > 30.0, "Laufen nach rechts zu kurz")
+	_check(_klio.global_position.x - start.x > 18.0, "Laufen nach rechts zu kurz")
 	var peak: float = _klio.velocity.length()
 	_check(absf(peak - CONFIG.human_speed) < 6.0, "Endtempo %.1f statt %.1f" % [peak, CONFIG.human_speed])
 	await _frames(12)
@@ -57,22 +59,22 @@ func _run() -> void:
 	await _shot("03_fairy")
 
 	# --- Hecke: zu Fuß blockiert, fliegend überquerbar ----------------------
-	var above_hedge: Vector2 = Vector2(15 * 32 + 16, 19 * 32 - 14)
+	var above_hedge: Vector2 = Vector2(15 * T + 8, 19 * T - 7)
 	_klio.global_position = above_hedge
 	await _frames(3)
 	await _hold(&"move_down", 0.7)
-	_check(_klio.global_position.y < 19 * 32 + 20, "Fee läuft ohne Fliegen durch die Hecke (y=%.0f)" % _klio.global_position.y)
+	_check(_klio.global_position.y < 19 * T + 10, "Fee läuft ohne Fliegen durch die Hecke (y=%.0f)" % _klio.global_position.y)
 	Input.action_press(&"fly_jump")
 	await _hold(&"move_down", 0.7)
 	await _shot("04_flying_over_hedge")
 	await _hold(&"move_down", 0.4)
 	Input.action_release(&"fly_jump")
-	_check(_klio.global_position.y > 19 * 32 + 20, "Fee fliegt nicht über die Hecke (y=%.0f)" % _klio.global_position.y)
+	_check(_klio.global_position.y > 19 * T + 10, "Fee fliegt nicht über die Hecke (y=%.0f)" % _klio.global_position.y)
 	await _seconds(0.5)
 	_check(not _klio.flying, "Fee landet nicht")
 
 	# --- Kein Platz für Menschengröße -> Verwandlung wird abgelehnt ---------
-	_klio.global_position = Vector2(15 * 32 + 16, 19 * 32 + 25)
+	_klio.global_position = Vector2(15 * T + 8, 19 * T + 12)
 	_klio.flying = true
 	await _frames(3)
 	var toast: Array[String] = []
@@ -85,8 +87,8 @@ func _run() -> void:
 	_klio.toast_requested.disconnect(on_toast)
 
 	# --- Auf dem Hund reiten (als Fee) --------------------------------------
-	_klio.global_position = Vector2(20 * 32 + 16, 17 * 32 + 20)
-	_dog.global_position = _klio.global_position + Vector2(10, 2)
+	_klio.global_position = Vector2(20 * T + 8, 17 * T + 10)
+	_dog.global_position = _klio.global_position + Vector2(8, 2)
 	_dog.velocity = Vector2.ZERO
 	await _frames(6)
 	await _tap(&"interact")
@@ -114,7 +116,7 @@ func _run() -> void:
 	_check(is_equal_approx(GameState.local_player().glow, glow_before), "Feenring hat Feenglanz gekostet")
 
 	# --- Pferd: aufsteigen, drei Gangarten, anhalten, absteigen -------------
-	_klio.global_position = _horse.global_position + Vector2(24, 6)
+	_klio.global_position = _horse.global_position + Vector2(16, 4)
 	await _frames(6)
 	await _tap(&"fly_jump")
 	await _frames(4)
@@ -144,7 +146,7 @@ func _run() -> void:
 	_check(_klio.state.is_in(&"human"), "Absteigen vom Pferd fehlgeschlagen")
 
 	# --- Rufen, Pfeifen, Streicheln ------------------------------------------
-	_klio.global_position = Vector2(19 * 32 + 16, 16 * 32 + 20)
+	_klio.global_position = Vector2(19 * T + 8, 16 * T + 10)
 	await _frames(2)
 	await _tap(&"whistle")
 	await _frames(2)
@@ -152,12 +154,12 @@ func _run() -> void:
 	await _tap(&"dog_call")
 	# Der Hund nimmt per Navigation den Weg um Zäune herum (ggf. durchs Tor)
 	for i: int in 16:
-		if _dog.global_position.distance_to(_klio.global_position) < 50.0:
+		if _dog.global_position.distance_to(_klio.global_position) < 30.0:
 			break
 		await _seconds(0.5)
-	_check(_dog.global_position.distance_to(_klio.global_position) < 50.0, "Hund kommt nicht auf Zuruf")
+	_check(_dog.global_position.distance_to(_klio.global_position) < 30.0, "Hund kommt nicht auf Zuruf")
 	await _seconds(1.5)
-	_dog.global_position = _klio.global_position + Vector2(-12, 4)
+	_dog.global_position = _klio.global_position + Vector2(-10, 3)
 	await _frames(4)
 	await _tap(&"interact")
 	await _frames(10)
@@ -205,7 +207,7 @@ func _check_navigation() -> void:
 	var map: RID = get_viewport().world_2d.navigation_map
 	NavigationServer2D.map_force_update(map)
 	var path: PackedVector2Array = NavigationServer2D.map_get_path(map, _dog.global_position,
-		_horse.global_position + Vector2(0, 60), true)
+		_horse.global_position + Vector2(0, 40), true)
 	_check(path.size() >= 2, "Navigationsnetz liefert keinen Weg")
 
 

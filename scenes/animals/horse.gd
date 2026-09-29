@@ -15,11 +15,11 @@ const SFX_HOOVES: Array[AudioStream] = [
 ## Hufschlag-Frames je Gangart (Viertakt, Zweitakt, Dreitakt)
 const GAIT_KEYS: Array[String] = ["", "gait.walk", "gait.trot", "gait.canter"]
 ## Sitzplatz des Reiters (relativ zu den Hufen) je Ansicht
-const SEATS: Dictionary = {"side": Vector2(7, -22), "down": Vector2(0, -30), "up": Vector2(0, -21)}
-const JUMP_PROBE: Vector2 = Vector2(28, 10)
+const SEATS: Dictionary = {"side": Vector2(3, -8), "down": Vector2(0, -8), "up": Vector2(0, -9)}
+const JUMP_PROBE: Vector2 = Vector2(18, 6)
 const PET_TIME: float = 1.4
-## Hufe liegen im 96x64-Frame auf Zeile 61 -> Sprite so versetzen, dass sie auf dem Ursprung stehen
-const SPRITE_OFFSET_Y: float = -31.0
+## Hufe liegen im 40x24-Frame auf der untersten Zeile -> Sprite so versetzen, dass sie auf dem Ursprung stehen
+const SPRITE_OFFSET_Y: float = -12.0
 
 @export var horse_name: String = "Holunder"
 

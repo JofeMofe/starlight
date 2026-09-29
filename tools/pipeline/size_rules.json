@@ -3,7 +3,7 @@
   "rules": [
     {"name": "Palette",         "glob": "assets/palette/*",               "skip": true},
     {"name": "Normal Maps",     "glob": "assets/normalmaps/*",            "grid": [1, 1]},
-    {"name": "Tilesets",        "glob": "assets/tilesets/*",              "grid": [32, 32]},
+    {"name": "Tilesets",        "glob": "assets/tilesets/*",              "grid": [16, 16]},
     {"name": "Portraits",       "glob": "assets/portraits/*",             "grid": [128, 128]},
     {"name": "Item-Icons",      "glob": "assets/sprites/items/*",         "grid": [32, 32]},
     {"name": "Klio/Figuren",    "glob": "assets/sprites/characters/*",    "grid": [16, 4]},

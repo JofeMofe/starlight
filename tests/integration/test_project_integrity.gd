@@ -121,8 +121,8 @@ func test_main_scene_and_autoloads_configured() -> void:
 
 
 func test_pixel_art_project_settings() -> void:
-	assert_int(int(ProjectSettings.get_setting("display/window/size/viewport_width"))).is_equal(640)
-	assert_int(int(ProjectSettings.get_setting("display/window/size/viewport_height"))).is_equal(360)
+	assert_int(int(ProjectSettings.get_setting("display/window/size/viewport_width"))).is_equal(480)
+	assert_int(int(ProjectSettings.get_setting("display/window/size/viewport_height"))).is_equal(270)
 	assert_str(str(ProjectSettings.get_setting("display/window/stretch/scale_mode"))).is_equal("integer")
 	assert_int(int(ProjectSettings.get_setting("rendering/textures/canvas_textures/default_texture_filter"))).is_equal(0)
 	assert_bool(bool(ProjectSettings.get_setting("rendering/2d/snap/snap_2d_transforms_to_pixel"))).is_true()

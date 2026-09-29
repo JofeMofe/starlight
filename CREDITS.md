@@ -22,29 +22,18 @@ oder aus frei lizenzierten Vorlagen abgeleitet (siehe „Fremd-Assets“); die v
 
 ## Fremd-Assets
 
-### Klio (Menschen- und Feengröße) – Liberated Pixel Cup (LPC)
+### Welt der Mooswiesen – Sunnyside World
 
-Klios Sprites (`assets/sprites/characters/klio_body.png`, `klio_fairy.png`) sind aus Teilen des
-[Universal LPC Spritesheet Character Generator](https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator)
-zusammengesetzt, auf die Starlight-Palette umgefärbt und angepasst (offene Jacke, Haare, Brille, Feengröße).
-Verwendete Lizenz: **OGA-BY 3.0** (bzw. CC0 für Kette und Ohrstecker), Lizenztext:
-`docs/licenses/OGA-BY-3.0.txt`. Die Originaldateien liegen unter `tools/pipeline/vendor/lpc/`,
-die Zuordnung Datei → Autor:innen → Quelle steht in `tools/pipeline/vendor/lpc/CREDITS.csv`.
+Boden (Gras, Weg, Wasser), Zaun, Bäume (mit Wind-Animation), Büsche, Steine, Blumen, Gräser,
+Baumstumpf und die Pilze des Feenrings stammen aus **Sunnyside World** von **Daniel Diggle**,
+https://danieldiggle.itch.io/sunnyside (Version 2.1, kostenlos, kommerzielle Nutzung erlaubt,
+Weiterverkauf/Weiterverbreitung des Pakets nicht erlaubt, keine Nutzung zum KI-Training).
+Lizenztext: `docs/licenses/Sunnyside_World.txt`. Die Übergänge von Weg und Wasser sind im
+Sunnyside-Stil aus den Original-Kacheln zusammengesetzt, die Zaunkacheln aus Pfosten und Latten.
+Das Originalpaket liegt nicht im Repository; `tools/pipeline/fetch_vendor.py` lädt es bei Bedarf.
 
-Künstler:innen: JaidynReiman, Nila122, Benjamin K. Smith (BenCreating), bluecarrot16, TheraHedwig,
-Evert, MuffinElZangano, Durrani, Pierre Vigier (pvigier), ElizaWy, Matthew Krohn (makrohn),
-Johannes Sjölund (wulax), Stephen Challener (Redshrike), Joe White.
+### Eigene Figuren im Sunnyside-Stil
 
-### Pferd Holunder – [LPC] Horses
-
-`assets/sprites/animals/horses/holunder.png` basiert auf **[LPC] Horses** von **bluecarrot16**
-(OGA-BY 3.0 / CC-BY 3.0 / GPL; hier OGA-BY 3.0), https://opengameart.org/content/lpc-horses,
-bezogen über https://github.com/hckr/endless-horse-run; auf die Palette umgefärbt.
-Original: `tools/pipeline/vendor/lpc_horses/`.
-
-### Gelände und Welt-Objekte – ElizaWy/LPC
-
-Boden (Gras, Weg, Wasser mit Übergängen), Bäume, Büsche, Steine, Blumen, Gräser und die Pilze des
-Feenrings stammen aus [ElizaWy/LPC](https://github.com/ElizaWy/LPC) (Ordner `Terrain`, CC-BY 3.0 /
-OGA-BY 3.0; hier OGA-BY 3.0), Originalfarben. Künstler:innen: Eliza Wyatt (DeathsDarling),
-Lanea Zimmerman (Sharm), Hyptosis, Demetrius. Einzelnachweise: `tools/pipeline/vendor/eliza/Terrain/Credits.txt`.
+Klio (Menschen- und Feengröße, Flügel), das Pferd Holunder und der Seelenhund sind eigene
+Pixelkarten (`tools/pipeline/sprites/klio_sunny.py`, `animals_sunny.py`) in der frei verwendbaren
+Palette **Endesga 32** (https://lospec.com/palette-list/endesga-32), damit sie zur Sunnyside-Welt passen.

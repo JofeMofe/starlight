@@ -15,7 +15,7 @@ const WALL_THICKNESS: float = 64.0
 var map_data: Dictionary = {}
 var tiles_data: Dictionary = {}
 var tile_set: TileSet
-var tile_size: int = 32
+var tile_size: int = 16
 var size: Vector2i = Vector2i.ZERO
 var spawns: Dictionary[StringName, Vector2] = {}
 
@@ -27,7 +27,7 @@ var _source_id: int = -1
 func _init(map_path: String) -> void:
 	map_data = _load_json(map_path)
 	tiles_data = _load_json(str(map_data.get("tileset", "")))
-	tile_size = int(tiles_data.get("tile_size", 32))
+	tile_size = int(tiles_data.get("tile_size", 16))
 	var sz: Array = map_data.get("size", [0, 0]) as Array
 	size = Vector2i(int(sz[0]), int(sz[1]))
 	_rows = PackedStringArray(map_data.get("rows", []) as Array)
@@ -90,7 +90,7 @@ func mask_at(cell: Vector2i, kind: String) -> int:
 
 
 func cell_to_feet(cell: Vector2i) -> Vector2:
-	return Vector2(cell.x * tile_size + tile_size * 0.5, cell.y * tile_size + tile_size - 4)
+	return Vector2(cell.x * tile_size + tile_size * 0.5, cell.y * tile_size + tile_size * 0.75)
 
 
 func cell_center(cell: Vector2i) -> Vector2:
@@ -119,7 +119,7 @@ func _build_tileset() -> TileSet:
 			src.create_tile(coords)
 			var td: TileData = src.get_tile_data(coords, 0)
 			if bool(t.get("fence", false)):
-				td.y_sort_origin = 8
+				td.y_sort_origin = tile_size >> 2
 				for poly: PackedVector2Array in _fence_polygons(col):
 					_add_polygon(td, poly)
 			elif str(t.get("collision", "")) != "":
@@ -146,15 +146,16 @@ func _inset_rect(mask: int, inset: float) -> PackedVector2Array:
 ## damit Figuren hinter dem Zaun (weiter oben) nicht anstoßen.
 func _fence_polygons(mask: int) -> Array[PackedVector2Array]:
 	var h: float = tile_size * 0.5
-	var polys: Array[PackedVector2Array] = [_rect(-5, 2, 5, 11)]
+	var k: float = tile_size / 16.0
+	var polys: Array[PackedVector2Array] = [_rect(-3 * k, 0, 3 * k, 5 * k)]
 	if mask & E:
-		polys.append(_rect(0, 3, h, 10))
+		polys.append(_rect(0, 1 * k, h, 4 * k))
 	if mask & W:
-		polys.append(_rect(-h, 3, 0, 10))
+		polys.append(_rect(-h, 1 * k, 0, 4 * k))
 	if mask & N:
-		polys.append(_rect(-3, -h, 3, 10))
+		polys.append(_rect(-2 * k, -h, 2 * k, 4 * k))
 	if mask & S:
-		polys.append(_rect(-3, 2, 3, h))
+		polys.append(_rect(-2 * k, 0, 2 * k, h))
 	return polys
 
 
@@ -164,7 +165,7 @@ func _rect(l: float, t: float, r: float, b: float) -> PackedVector2Array:
 
 # --- Sichtbarer Boden (Dual Grid) ---------------------------------------------
 
-## Eckbasierte Bodenkacheln (LPC-Format): Die Ebene liegt um eine halbe Kachel
+## Eckbasierte Bodenkacheln: Die Ebene liegt um eine halbe Kachel
 ## versetzt, jede sichtbare Kachel richtet sich nach den vier Kartenzellen an ihren
 ## Ecken. So entstehen runde Ufer und Wegränder ohne Sonderfälle. Die Rasterebene
 ## darunter trägt weiterhin die Kollisionen.
@@ -265,18 +266,24 @@ func _scatter(objects_parent: Node2D, deco_parent: Node2D) -> void:
 					break
 
 
+## Waldsaum am Kartenrand. Die obere Reihe steht zwei Kacheln tief, damit die
+## Kronen nicht an der Kamerakante abgeschnitten werden; Wege bleiben frei.
 func _place_border_trees(parent: Node2D) -> void:
 	var objects: Dictionary = tiles_data.get("objects", {}) as Dictionary
-	var scene: PackedScene = load(str(objects["tree"])) as PackedScene
+	var scenes: Array[PackedScene] = [load(str(objects["tree"])) as PackedScene]
+	if objects.has("tree_pine"):
+		scenes.append(load(str(objects["tree_pine"])) as PackedScene)
 	var cells: Array[Vector2i] = []
 	for x: int in range(0, size.x, 2):
-		cells.append(Vector2i(x, 0))
+		cells.append(Vector2i(x, 2))
 		cells.append(Vector2i(x + 1, size.y - 1))
-	for y: int in range(2, size.y - 1, 2):
+	for y: int in range(4, size.y - 1, 2):
 		cells.append(Vector2i(0, y))
 		cells.append(Vector2i(size.x - 1, y - 1))
 	for cell: Vector2i in cells:
-		var tree: Node2D = scene.instantiate() as Node2D
+		if kind_at(cell) != "grass":
+			continue
+		var tree: Node2D = scenes[absi(hash([cell, "border"])) % scenes.size()].instantiate() as Node2D
 		tree.name = "border_tree_%d_%d" % [cell.x, cell.y]
 		tree.position = cell_to_feet(cell)
 		parent.add_child(tree)

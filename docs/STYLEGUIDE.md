@@ -14,23 +14,33 @@ liebevolle Objekte wie *Unpacking*.
 
 ## 2. Auflösung & Maße
 
+> **Stilwechsel 2026-09-29:** Die Welt nutzt jetzt *Sunnyside World* (16-px-Kacheln, Endesga-32-Farben).
+> Alle Maße unten folgen diesem Raster; die ursprünglichen Werte (32-px-Kacheln, 640 × 360) sind überholt.
+
 | Element | Größe | Raster-Prüfung (`size_rules.json`) |
 |---|---|---|
-| Interne Auflösung | 640 × 360, Integer-Scaling ×2/×3/×4/×6 | – |
-| Tile | 32 × 32 | Vielfache von 32 |
-| Klio Menschengröße | 32 × 48 (Haare eigener Layer) | Vielfache von 16 × 4 |
-| Klio Feengröße | 16 × 20 (Brille als 1-px-Gestell + Glanzpixel) | dito |
-| NPCs | 32 × 48 (Kinder 32 × 36) | Vielfache von 32 × 12 |
-| Hunde | 32 × 24 bis 48 × 32 | Vielfache von 16 × 8 |
-| Pferde | 96 × 64 (Shetty/Fohlen 64 × 48) | Vielfache von 32 × 16 |
+| Interne Auflösung | 480 × 270, Integer-Scaling (×4 = 1920 × 1080, ×8 = 3840 × 2160) | – |
+| Tile | 16 × 16 | Vielfache von 16 |
+| Klio Menschengröße | 23 px hoch im Frame 20 × 24 (Sunnyside-Figuren: 16 px) | Vielfache von 16 × 4 |
+| Klio Feengröße | 15 px hoch im Frame 24 × 20 (mit Flügeln), Brille als Rand + Glas | dito |
+| NPCs | ca. 16–23 px hoch (Sunnyside-Proportionen, großer Kopf) | Vielfache von 32 × 12 |
+| Hunde | Frame 20 × 16 | Vielfache von 16 × 8 |
+| Pferde | Frame 40 × 24 (Körper 36 × 24) | Vielfache von 32 × 16 |
 | Portraits | 128 × 128 (Klio ≥ 12 Emotionen, NPCs 8) | Vielfache von 128 |
-| Item-Icons | 32 × 32 (im Inventar ×2) | Vielfache von 32 |
+| Item-Icons | 16 × 16 (Sunnyside) bzw. 32 × 32 | Vielfache von 32 |
 | UI-Grundraster | 8 px | Vielfache von 8 |
+
+Figuren und Tiere folgen dem Sunnyside-Aufbau: dunkelvioletter Umriss (#181425), flache Farbflächen,
+eine Schattenstufe, großer Kopf, kurze Beine. Seitenansichten werden nach rechts gezeichnet und beim
+Export gespiegelt (Grundrichtung im Spiel: links).
 
 Spritesheets von `atlas.py` tragen ihre Framegröße in der JSON-Nachbardatei; `check_sizes.py` prüft,
 dass das Sheet ein ganzzahliges Vielfaches davon ist.
 
-## 3. Palette (64 Farben)
+## 3. Palette (Endesga 32 + 64 Farben der Master-Palette)
+
+Neue Grafiken verwenden **Endesga 32** (Sunnyside-Palette, `palette.py: ENDESGA32`, ohne reines Weiß).
+Die ursprüngliche 64er-Master-Palette gilt weiter für Effekte, UI und Schrift.
 
 Datei: `assets/palette/starlight.hex`, Swatch `starlight_swatch.png` (eine Zeile pro Rampe),
 Shader-Lookup `starlight_strip.png` (64 × 1, Index = Palettenindex).

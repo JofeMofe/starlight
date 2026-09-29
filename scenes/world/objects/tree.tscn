@@ -1,23 +1,20 @@
 [gd_scene load_steps=4 format=3]
 
-[ext_resource type="Texture2D" path="res://assets/sprites/fx/shadow_tree.png" id="2_shadow"]
 [ext_resource type="Texture2D" path="res://assets/tilesets/mooswiesen/tree.png" id="1_tex"]
+[ext_resource type="Script" path="res://scripts/components/sway_sprite.gd" id="2_sway"]
 
 [sub_resource type="CircleShape2D" id="Shape_trunk"]
-radius = 7.0
+radius = 4.0
 
 [node name="Tree" type="StaticBody2D"]
 collision_mask = 0
 
-[node name="Shadow" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.28)
-position = Vector2(2, -2)
-texture = ExtResource("2_shadow")
-
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_tex")
-offset = Vector2(0, -46)
+offset = Vector2(0, -22)
+hframes = 4
+script = ExtResource("2_sway")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3)
+position = Vector2(0, -2)
 shape = SubResource("Shape_trunk")

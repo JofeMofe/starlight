@@ -12,9 +12,9 @@ const SFX_STEPS: Array[AudioStream] = [
 ]
 const REPATH_INTERVAL: float = 0.25
 const PET_TIME: float = 1.3
-const COME_ARRIVE_DISTANCE: float = 22.0
+const COME_ARRIVE_DISTANCE: float = 14.0
 ## Sitzplatz der Fee je Ansicht (relativ zu den Pfoten)
-const SEATS: Dictionary = {"side": Vector2(6, -8), "down": Vector2(0, -9), "up": Vector2(0, -8)}
+const SEATS: Dictionary = {"side": Vector2(2, -3), "down": Vector2(0, -9), "up": Vector2(0, -5)}
 
 @export var dog_name: String = "Funke"
 
@@ -224,5 +224,5 @@ func _update_anim() -> void:
 
 
 func _on_frame(frame_index: int) -> void:
-	if (_anim.current.begins_with("run") or _anim.current.begins_with("walk")) and frame_index % 3 == 0:
+	if (_anim.current.begins_with("run") or _anim.current.begins_with("walk")) and frame_index % 2 == 0:
 		AudioManager.play_sfx(SFX_STEPS[frame_index % 2], -10.0, 0.12, &"SFX", 1.4)

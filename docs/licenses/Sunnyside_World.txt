@@ -1,0 +1,17 @@
+Sunnyside World – Asset Pack von Daniel Diggle
+Quelle: https://danieldiggle.itch.io/sunnyside (abgerufen 2026-09-29, Version 2.1)
+
+Lizenz (V1, Wortlaut der itch.io-Seite):
+"This asset pack can be used in free and commercial projects. You can modify the
+assets as you need. Credit is not necessary, but always appreciated. You can
+redistribute the assets as part of tutorials or educational courses as long as a
+link to the Sunnyside World itch.io page is included. You may not repackage and
+resell the assets, no matter how much they are modified - this includes as NFT's.
+You may not use these assets to train AI."
+
+Umsetzung in Starlight:
+- Das Originalpaket liegt NICHT im Repository; tools/pipeline/fetch_vendor.py lädt
+  es bei Bedarf nach tools/pipeline/vendor/sunnyside (in .gitignore).
+- Im Repository liegen nur die für das Spiel zugeschnittenen bzw. daraus
+  zusammengesetzten Grafiken (assets/tilesets/mooswiesen/*).
+- Die Assets werden nicht zum Trainieren von KI verwendet.

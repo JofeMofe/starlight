@@ -4,4 +4,4 @@
 
 [node name="Flowers" type="Sprite2D"]
 texture = ExtResource("1_tex")
-offset = Vector2(0, -10)
+offset = Vector2(0, -6)

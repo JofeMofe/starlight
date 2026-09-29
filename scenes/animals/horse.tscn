@@ -8,10 +8,10 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/fx/fx_particles.png" id="6_fx"]
 
 [sub_resource type="RectangleShape2D" id="Shape_body"]
-size = Vector2(22, 8)
+size = Vector2(16, 6)
 
 [sub_resource type="RectangleShape2D" id="Shape_interact"]
-size = Vector2(52, 26)
+size = Vector2(36, 18)
 
 [sub_resource type="AtlasTexture" id="Tex_heart"]
 atlas = ExtResource("6_fx")
@@ -30,7 +30,7 @@ motion_mode = 1
 script = ExtResource("1_horse")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
+position = Vector2(0, -3)
 shape = SubResource("Shape_body")
 
 [node name="Shadow" type="Sprite2D" parent="."]
@@ -40,9 +40,9 @@ texture = ExtResource("2_shadow")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("3_sheet")
-offset = Vector2(0, -31)
+offset = Vector2(0, -12)
 region_enabled = true
-region_rect = Rect2(0, 0, 128, 128)
+region_rect = Rect2(0, 0, 40, 24)
 
 [node name="Anim" type="Node" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("4_anim")
@@ -51,19 +51,19 @@ meta_path = "res://assets/sprites/animals/horses/holunder.json"
 autoplay = &"idle_side"
 
 [node name="Agent" type="NavigationAgent2D" parent="."]
-path_desired_distance = 10.0
-target_desired_distance = 20.0
-radius = 12.0
+path_desired_distance = 8.0
+target_desired_distance = 14.0
+radius = 8.0
 
 [node name="Interactable" type="Area2D" parent="."]
-position = Vector2(0, -14)
+position = Vector2(0, -10)
 script = ExtResource("5_interact")
 
 [node name="Shape" type="CollisionShape2D" parent="Interactable"]
 shape = SubResource("Shape_interact")
 
 [node name="Hearts" type="CPUParticles2D" parent="."]
-position = Vector2(-18, -50)
+position = Vector2(-10, -24)
 emitting = false
 amount = 6
 lifetime = 1.2
@@ -86,7 +86,7 @@ one_shot = true
 explosiveness = 1.0
 texture = SubResource("Tex_dust")
 emission_shape = 3
-emission_rect_extents = Vector2(16, 2)
+emission_rect_extents = Vector2(10, 2)
 direction = Vector2(0, -1)
 spread = 80.0
 gravity = Vector2(0, 30)

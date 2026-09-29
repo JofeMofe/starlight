@@ -6,9 +6,9 @@ extends Camera2D
 ## kein Subpixel-Zittern der Figur. Dazu ein 1-Pixel-"Puls" als Rückmeldung.
 
 const LOOK_AHEAD_FACTOR: float = 0.22
-const LOOK_AHEAD_MAX: float = 22.0
+const LOOK_AHEAD_MAX: float = 14.0
 const LOOK_AHEAD_RATE: float = 2.6
-const VERTICAL_BIAS: float = -18.0
+const VERTICAL_BIAS: float = -10.0
 const PUNCH_TIME: float = 0.12
 
 var target: Node2D = null

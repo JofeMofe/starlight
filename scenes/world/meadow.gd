@@ -8,7 +8,7 @@ const MAP_PATH: String = "res://data/maps/test_meadow.json"
 ## ausprobiert werden kann; an Feenringen ist er immer kostenlos.
 const PROTOTYPE_CHAPTER: int = 2
 ## Genug Abstand für das Pferd (halbe Körperbreite), damit es an Zaunecken nicht hängen bleibt
-const NAV_AGENT_RADIUS: float = 13.0
+const NAV_AGENT_RADIUS: float = 8.0
 
 var builder: MapBuilder
 
@@ -31,8 +31,8 @@ func _ready() -> void:
 	builder = MapBuilder.new(MAP_PATH)
 	builder.build(_ground, _fences, _world, _deco, _walls)
 	_klio.global_position = builder.spawns.get(&"klio", Vector2(320, 180))
-	_dog.global_position = builder.spawns.get(&"dog", _klio.global_position + Vector2(-24, 8))
-	_horse.global_position = builder.spawns.get(&"horse", _klio.global_position + Vector2(80, 0))
+	_dog.global_position = builder.spawns.get(&"dog", _klio.global_position + Vector2(-16, 4))
+	_horse.global_position = builder.spawns.get(&"horse", _klio.global_position + Vector2(48, 0))
 	_bake_navigation()
 	_camera.set_bounds(Rect2i(Vector2i.ZERO, builder.pixel_size()))
 	_camera.follow(_klio)

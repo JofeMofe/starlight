@@ -26,13 +26,13 @@ const SFX_CALL_DOG: AudioStream = preload("res://assets/audio/sfx/call_dog.ogg")
 const SFX_WHISTLE: AudioStream = preload("res://assets/audio/sfx/whistle_horse.ogg")
 const SFX_MOUNT: AudioStream = preload("res://assets/audio/sfx/mount.ogg")
 
-const HUMAN_SHAPE_SIZE: Vector2 = Vector2(12, 6)
-const FAIRY_SHAPE_SIZE: Vector2 = Vector2(6, 4)
-const INTERACT_REACH: float = 14.0
+const HUMAN_SHAPE_SIZE: Vector2 = Vector2(8, 4)
+const FAIRY_SHAPE_SIZE: Vector2 = Vector2(4, 3)
+const INTERACT_REACH: float = 10.0
 const HAIR_STIFFNESS: float = 90.0
 const HAIR_DAMPING: float = 9.0
 const WOBBLE_TIME: float = 0.3
-const FAIRY_RING_RADII: Vector2 = Vector2(34, 18)
+const FAIRY_RING_RADII: Vector2 = Vector2(22, 12)
 
 @export var input_enabled: bool = true
 
@@ -494,8 +494,8 @@ func _over_low_obstacle() -> bool:
 
 
 func _find_dismount_spot() -> Vector2:
-	var side: Vector2 = Vector2(22, 4)
-	for off: Vector2 in [Vector2(side.x, side.y), Vector2(-side.x, side.y), Vector2(0, 18), Vector2(0, -14)]:
+	var side: Vector2 = Vector2(16, 3)
+	for off: Vector2 in [Vector2(side.x, side.y), Vector2(-side.x, side.y), Vector2(0, 12), Vector2(0, -10)]:
 		var p: Vector2 = global_position + off
 		if is_fairy or has_room_for_human(p):
 			return p
@@ -508,8 +508,8 @@ func _refuse(reason_key: String) -> void:
 	toast_requested.emit(reason_key)
 
 
-func _on_body_frame(frame_index: int) -> void:
-	if _body_anim.current.begins_with("walk") and (frame_index == 0 or frame_index == 4):
+func _on_body_frame(_frame_index: int) -> void:
+	if _body_anim.current.begins_with("walk") and _body_anim.frame_value("step") == 1:
 		_step_index = (_step_index + 1) % SFX_STEPS.size()
 		AudioManager.play_sfx(SFX_STEPS[_step_index], -2.0, 0.08)
 

@@ -4,4 +4,4 @@
 
 [node name="Pebbles" type="Sprite2D"]
 texture = ExtResource("1_tex")
-offset = Vector2(0, -14)
+offset = Vector2(0, -6)

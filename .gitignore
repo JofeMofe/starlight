@@ -21,3 +21,4 @@ reports/
 tests/**/reports/
 addons/gdUnit4/reports/
 tools/bin/
+tools/pipeline/vendor/sunnyside/

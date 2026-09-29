@@ -83,7 +83,10 @@ def pixelmap(rows: list[str], legend: dict[str, RGBA]) -> Image.Image:
 
 
 def palette_set() -> set[tuple[int, int, int]]:
-    return set(palette_rgb())
+    """Erlaubte Sprite-Farben: Master-Palette plus Endesga 32 (Sunnyside-Stil)."""
+    from palette import ENDESGA32
+    endesga = {tuple(int(h[i:i + 2], 16) for i in (0, 2, 4)) for h in ENDESGA32}
+    return set(palette_rgb()) | endesga  # type: ignore[arg-type]
 
 
 def read_manifest() -> list[dict[str, str]]:

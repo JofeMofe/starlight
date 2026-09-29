@@ -11,7 +11,8 @@ from sl_common import ASSETS, ROOT, read_manifest, rel
 
 # Godot-Nebendateien gehören nicht ins Manifest.
 IGNORED_SUFFIXES = {".import", ".uid"}
-ALLOWED_LICENSES = {"MIT", "CC0", "CC0-1.0", "CC-BY-4.0", "OFL-1.1", "Public Domain", "OGA-BY-3.0"}
+ALLOWED_LICENSES = {"MIT", "CC0", "CC0-1.0", "CC-BY-4.0", "OFL-1.1", "Public Domain", "OGA-BY-3.0",
+                    "Sunnyside-World-V1"}
 FORBIDDEN_MARKERS = ("NC", "ND", "PROPRIETARY", "UNKNOWN")
 
 

@@ -4,6 +4,65 @@ Neueste Sitzung oben. Pro Sitzung: was, warum, offene Punkte.
 
 ---
 
+## Sitzung 6 – 2026-09-29 · Neuer Look: Sunnyside World, Klio/Pferd/Hund neu gezeichnet
+
+### Anlass und Entscheidungen
+
+- Nutzer: „Optik von Grund auf neu, so wie es Assets vorgeben, professionell, kostenlos.“ Auswahl
+  des Nutzers zunächst **Mana Seed**. Beim Prüfen der Lizenz fiel auf, dass Mana Seed jede Nutzung
+  in Projekten mit generativer KI – ausdrücklich auch KI-geschriebenem Code – untersagt. Starlight
+  wird von einer KI programmiert, das Repository ist öffentlich → Mana Seed nicht verwendet, die
+  heruntergeladenen Dateien gelöscht, nichts davon eingecheckt. Nutzer informiert; neue Wahl:
+  **Sunnyside World** (Daniel Diggle): kostenlos, auch kommerziell, nur KI-*Training* ist untersagt.
+  Festgehalten in CLAUDE.md §9.
+- Sunnyside darf nicht als Paket weiterverbreitet werden. Deshalb liegt es **nicht** im Repository:
+  `tools/pipeline/fetch_vendor.py` lädt es bei Bedarf (kostenloser itch.io-Download, ohne Konto)
+  nach `tools/pipeline/vendor/sunnyside/` (in `.gitignore`); eingecheckt sind nur die daraus
+  zugeschnittenen Spielgrafiken. Ohne Netz bleiben die vorhandenen Grafiken unverändert.
+- **Maßstab:** Ein erster Klio-Entwurf mit 31 px war so groß wie die Sunnyside-Bäume (Figuren dort:
+  16 px). Klio ist deshalb 23 px hoch – etwas größer als Sunnyside-Figuren, damit Brille und lange
+  Haare lesbar bleiben. Kacheln 16 px, **interne Auflösung 480 × 270** (×4 = 1080p exakt) statt
+  640 × 360; die Karte behält 40 × 30 Zellen, damit die Welt relativ zur Figur gleich groß bleibt.
+  Bewegungswerte (`movement.tres`) und Kamera auf den neuen Maßstab skaliert (≈ ×0,6).
+
+### Was wurde gemacht
+
+- **Welt** (`sprites/sunny_world.py`): Dual-Grid-Bodenatlas mit Weg- und Wasserübergängen im
+  Sunnyside-Stil (gerade Kanten, 45°-Fasen, dunkelgrüne Graskante, zweireihiger Schattensaum),
+  Füllungen aus Original-Kacheln. Zaun für alle 16 Nachbarmasken aus Pfosten und Latten. Objekte:
+  Laubbaum und Tanne mit Wind-Animation (`SwaySprite`, jede Instanz mit eigener Phase), Busch,
+  Beerenbusch, Stein, Kiesel, Grasbüschel, Blumen, Baumstumpf, Feenring aus Sunnyside-Pilzen.
+  Waldsaum oben zwei Kacheln tiefer, damit die Kronen nicht an der Kamerakante abgeschnitten sind.
+  Wege auf zwei Kacheln verbreitert.
+- **Klio** (`sprites/klio_sunny.py`): eigene Pixelkarten in Endesga 32: lange dunkelbraune Haare
+  mit Mittelscheitel ohne Pony, schmale rechteckige Brille (Rand, Glas, grüngraues Auge),
+  offene Jeansjacke über schwarz-lila Top, Jeans, dunkle Converse mit cremiger Sohle. Drei
+  Ansichten, Laufzyklus (Kontakt/Hochfedern, Schrittgeräusch über `step`-Daten), Blinzeln,
+  Reitpose, zierliche Fee (15 px) mit Libellenflügeln (6-Frame-Schlag).
+- **Pferd und Hund** (`sprites/animals_sunny.py`): Sunnyside hat keine Pferde/Hunde → eigene Figuren
+  im Sunnyside-Tierstil. Pferd (Fuchs) mit Schritt, Trab und Galopp (Schwebephase als Anheben
+  des ganzen Tieres), Hund (Border-Collie-Mix, tricolor) mit Gehen, Rennen, Sitzen.
+  Fellfarben als Rampen, damit die Genetik (M3) nur Rampen tauschen muss.
+- HUD an Bildschirmränder verankert (passt jetzt bei jeder Auflösung), Sitzpunkte, Kollisionen,
+  Interaktionsradien, Schatten und Test-Bot auf den neuen Maßstab umgestellt.
+- Palette: Endesga 32 zusätzlich erlaubt (`palette.py`), Sunnyside-Grafiken per Whitelist in
+  Originalfarben. Alte LPC-Module und -Vorlagen entfernt.
+
+### Verifiziert
+
+- `tools/run_all_checks.sh`: Asset-Checks, Lint (0 Warnungen), 46/46 Tests, 7-Tage-Smoke-Bot,
+  Kernmechanik-Bot (Laufen, Verwandeln, Fliegen über die Hecke, Hund reiten, Feenring, Pferd in
+  drei Gangarten, Rufen, Streicheln), Windows- und Linux-Export mit 30-s-Startlauf: alles grün.
+- Screenshots: `docs/screenshots/m1/sunnyside/` (11 Bilder vom Bot).
+
+### Offen
+
+- Klio, Pferd und Hund sind eine erste Fassung im neuen Stil; Signature-Animationen (Brille
+  zurechtschieben, Haare hinters Ohr), Pferde-Idle (Grasen, Schweifschlagen) und Portraits fehlen.
+- Nutzer-Feedback zum neuen Look abwarten.
+
+---
+
 ## Sitzung 5 – 2026-09-29 · Professioneller Look: LPC-Welt und LPC-Pferd
 
 ### Anlass und Entscheidung

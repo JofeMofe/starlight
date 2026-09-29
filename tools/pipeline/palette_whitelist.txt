@@ -5,12 +5,4 @@ assets/sprites/fx/light_*    # Lichttexturen für PointLight2D (weiche Verläufe
 assets/sprites/**/mask_*     # Graustufen-/Indexmasken für Palette-Swap
 assets/sprites/ui/overlay_*  # UI-Transparenzen (Abdunkler, Vignetten)
 assets/fonts/*               # Glyphenmasken (weiß), Einfärbung zur Laufzeit
-assets/tilesets/mooswiesen/meadow_ground.png  # LPC-Gelände (ElizaWy) in Originalfarben, Projektentscheidung 2026-09-29
-assets/tilesets/mooswiesen/tree.png  # LPC-Objekt (ElizaWy) in Originalfarben
-assets/tilesets/mooswiesen/tree_blossom.png  # LPC-Objekt (ElizaWy) in Originalfarben
-assets/tilesets/mooswiesen/bush.png  # LPC-Objekt (ElizaWy) in Originalfarben
-assets/tilesets/mooswiesen/rock.png  # LPC-Objekt (ElizaWy) in Originalfarben
-assets/tilesets/mooswiesen/flowers.png  # LPC-Objekt (ElizaWy) in Originalfarben
-assets/tilesets/mooswiesen/fairy_ring.png  # LPC-Objekt (ElizaWy) in Originalfarben
-assets/tilesets/mooswiesen/tall_grass.png  # LPC-Objekt (ElizaWy) in Originalfarben
-assets/tilesets/mooswiesen/pebbles.png  # LPC-Objekt (ElizaWy) in Originalfarben
+assets/tilesets/mooswiesen/*  # Sunnyside World (Daniel Diggle) in Originalfarben, Projektentscheidung 2026-09-29
