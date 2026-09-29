@@ -17,7 +17,7 @@ texture = ExtResource("2_shadow")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_tex")
-offset = Vector2(0, -12)
+offset = Vector2(0, -14)
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)

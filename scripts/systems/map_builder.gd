@@ -68,6 +68,7 @@ func build(ground: TileMapLayer, objects_layer: TileMapLayer, objects_parent: No
 	if bool(map_data.get("border_trees", false)):
 		_place_border_trees(objects_parent)
 	_build_walls(walls)
+	_build_ground(ground)
 
 
 func kind_at(cell: Vector2i) -> String:
@@ -159,6 +160,72 @@ func _fence_polygons(mask: int) -> Array[PackedVector2Array]:
 
 func _rect(l: float, t: float, r: float, b: float) -> PackedVector2Array:
 	return PackedVector2Array([Vector2(l, t), Vector2(r, t), Vector2(r, b), Vector2(l, b)])
+
+
+# --- Sichtbarer Boden (Dual Grid) ---------------------------------------------
+
+## Eckbasierte Bodenkacheln (LPC-Format): Die Ebene liegt um eine halbe Kachel
+## versetzt, jede sichtbare Kachel richtet sich nach den vier Kartenzellen an ihren
+## Ecken. So entstehen runde Ufer und Wegränder ohne Sonderfälle. Die Rasterebene
+## darunter trägt weiterhin die Kollisionen.
+func _build_ground(ground: TileMapLayer) -> void:
+	var g: Dictionary = tiles_data.get("ground", {}) as Dictionary
+	if g.is_empty():
+		return
+	var src: TileSetAtlasSource = TileSetAtlasSource.new()
+	src.texture = load(str(g["texture"])) as Texture2D
+	src.texture_region_size = Vector2i(tile_size, tile_size)
+	var grid: Vector2i = Vector2i(src.texture.get_size()) / tile_size
+	for y: int in grid.y:
+		for x: int in grid.x:
+			src.create_tile(Vector2i(x, y))
+	var ts: TileSet = TileSet.new()
+	ts.tile_size = Vector2i(tile_size, tile_size)
+	var sid: int = ts.add_source(src)
+	var layer: TileMapLayer = TileMapLayer.new()
+	layer.name = "GroundDual"
+	layer.tile_set = ts
+	layer.position = -Vector2.ONE * tile_size * 0.5
+	ground.add_child(layer)
+	var transitions: Array = g.get("transitions", []) as Array
+	var variants: int = int(g.get("variants", 1))
+	for j: int in size.y + 1:
+		for i: int in size.x + 1:
+			var at: Vector2i = Vector2i(i, j)
+			var corners: Array[String] = [_ground_kind(at + Vector2i(-1, -1)), _ground_kind(at + Vector2i(0, -1)),
+					_ground_kind(at + Vector2i(-1, 0)), _ground_kind(at)]
+			var coords: Vector2i = Vector2i(_ground_variant(at, variants), int(g["grass_row"]))
+			for t: Variant in transitions:
+				var td: Dictionary = t as Dictionary
+				var mask: int = 0
+				for k: int in 4:
+					if corners[k] == str(td["kind"]):
+						mask |= 8 >> k
+				if mask == 0:
+					continue
+				if mask == 15:
+					coords = Vector2i(_ground_variant(at, variants), int(td["fill_row"]))
+				else:
+					coords = Vector2i(mask, int(td["row"]))
+				break
+			layer.set_cell(at, sid, coords)
+
+
+## Geländeart für den Boden: nur Übergangsarten zählen, alles andere ist Gras.
+## Außerhalb der Karte gilt die nächste Randzelle.
+func _ground_kind(cell: Vector2i) -> String:
+	var c: Vector2i = cell.clamp(Vector2i.ZERO, size - Vector2i.ONE)
+	var kind: String = kind_at(c)
+	for t: Variant in (tiles_data.get("ground", {}) as Dictionary).get("transitions", []) as Array:
+		if str((t as Dictionary)["kind"]) == kind:
+			return kind
+	return "grass"
+
+
+func _ground_variant(at: Vector2i, variants: int) -> int:
+	# Grundvariante am häufigsten, die übrigen deterministisch gestreut
+	var h: int = absi(hash([at, "ground"])) % 100
+	return 0 if h < 45 or variants <= 1 else 1 + h % (variants - 1)
 
 
 # --- Objekte ----------------------------------------------------------------

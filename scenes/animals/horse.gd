@@ -13,14 +13,13 @@ const SFX_HOOVES: Array[AudioStream] = [
 	preload("res://assets/audio/sfx/hoof_grass_3.ogg"),
 ]
 ## Hufschlag-Frames je Gangart (Viertakt, Zweitakt, Dreitakt)
-const HOOF_FRAMES: Dictionary = {"walk": [0, 2, 4, 6], "trot": [0, 4], "canter": [0, 3, 5]}
 const GAIT_KEYS: Array[String] = ["", "gait.walk", "gait.trot", "gait.canter"]
 ## Sitzplatz des Reiters (relativ zu den Hufen) je Ansicht
-const SEATS: Dictionary = {"side": Vector2(3, -17), "down": Vector2(0, -21), "up": Vector2(0, -17)}
+const SEATS: Dictionary = {"side": Vector2(7, -22), "down": Vector2(0, -30), "up": Vector2(0, -21)}
 const JUMP_PROBE: Vector2 = Vector2(28, 10)
 const PET_TIME: float = 1.4
 ## Hufe liegen im 96x64-Frame auf Zeile 61 -> Sprite so versetzen, dass sie auf dem Ursprung stehen
-const SPRITE_OFFSET_Y: float = -29.0
+const SPRITE_OFFSET_Y: float = -31.0
 
 @export var horse_name: String = "Holunder"
 
@@ -267,6 +266,6 @@ func _update_anim() -> void:
 
 
 func _on_frame(frame_index: int) -> void:
-	var gname: String = String(_anim.current).get_slice("_", 0)
-	if HOOF_FRAMES.has(gname) and frame_index in (HOOF_FRAMES[gname] as Array) and not jumping:
+	# Hufschläge stehen als "hoof" in den Animationsdaten des Spritesheets
+	if _anim.frame_value("hoof") == 1 and not jumping:
 		AudioManager.play_sfx(SFX_HOOVES[frame_index % SFX_HOOVES.size()], -3.0, 0.1)

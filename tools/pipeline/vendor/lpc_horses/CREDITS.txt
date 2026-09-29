@@ -1,0 +1,7 @@
+[LPC] Horses
+Artist: bluecarrot16
+License: CC-BY 3.0 / GPL 3.0 / GPL 2.0 / OGA-BY 3.0 (hier genutzt: OGA-BY 3.0)
+Source: https://opengameart.org/content/lpc-horses
+Bezogen über: https://github.com/hckr/endless-horse-run (assets/horse.png, unverändert)
+Layout: 128x128-Frames, 4 Spalten; Zeilen 0-3 Galopp (oben, links, unten, rechts),
+4-7 Schritt, 8 Stehen (oben, links, unten, rechts), 9-12 Fressen.

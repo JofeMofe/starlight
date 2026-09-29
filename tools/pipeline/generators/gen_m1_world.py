@@ -15,80 +15,14 @@ from PIL import Image
 
 from palette import color
 from sl_common import ASSETS, TRANSPARENT, GeneratedAsset, save_png
+from sprites import lpc_objects as LO
+from sprites import lpc_terrain as LT
 from sprites import meadow_v2 as M2
 from sprites.rig import Material, Rig, render
 
 GEN = "tools/pipeline/generators/gen_m1_world.py"
 T = 32
 N, E, S, W = 1, 2, 4, 8
-
-
-def _grass(seed: int, kind: int) -> Image.Image:
-    rng = random.Random(seed)
-    img = Image.new("RGBA", (T, T), color("moss", 3))
-    px = img.load()
-    for _ in range(10):
-        cx, cy = rng.randrange(T), rng.randrange(T)
-        c = color("moss", 2) if rng.random() < 0.4 else color("moss", 4)
-        for dx, dy in ((0, 0), (1, 0), (0, 1)):
-            px[(cx + dx) % T, (cy + dy) % T] = c
-    for _ in range(4 if kind == 1 else 2):
-        cx, cy = rng.randrange(2, T - 2), rng.randrange(3, T)
-        for dx in (-1, 0, 1):
-            px[(cx + dx) % T, (cy - 1) % T] = color("moss", 2)
-            px[(cx + dx) % T, (cy - 2 - (dx == 0)) % T] = color("moss", 5)
-    if kind == 2:  # Wiesenblumen
-        for _ in range(4):
-            cx, cy = rng.randrange(1, T - 1), rng.randrange(1, T - 1)
-            petal = rng.choice([color("rose", 6), color("dusk", 6), color("ember", 4), color("fae", 4)])
-            for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
-                px[cx + dx, cy + dy] = petal
-            px[cx, cy] = color("ember", 3)
-    if kind == 3:  # Klee
-        for _ in range(5):
-            cx, cy = rng.randrange(1, T - 2), rng.randrange(1, T - 2)
-            for dx, dy in ((0, 0), (1, 0), (0, 1), (1, 1)):
-                px[cx + dx, cy + dy] = color("moss", 5)
-            px[cx, cy] = color("moss", 6)
-    return img
-
-
-def _edge_tile(mask: int, seed: int, inner: tuple, inner_dark: tuple, inner_light: tuple,
-               rim: tuple, rim_dark: tuple, speckle: float, base_grass: Image.Image) -> Image.Image:
-    """Innenfläche (Weg/Wasser) mit weichem, unregelmäßigem Rand zu Gras,
-    wo der Nachbar nicht gleichartig ist."""
-    rng = random.Random(seed * 31 + mask)
-    img = base_grass.copy()
-    px = img.load()
-    inset = 4
-
-    def inside(x: int, y: int) -> float:
-        # Abstand zum Rand der Fläche (negativ = außerhalb)
-        d = 99.0
-        wob = lambda v: 1.0 * math.sin(v * 0.9 + seed) + 0.6 * math.sin(v * 2.3 + seed * 2)
-        if not mask & N:
-            d = min(d, y - inset - wob(x))
-        if not mask & S:
-            d = min(d, (T - 1 - y) - inset - wob(x + 7))
-        if not mask & W:
-            d = min(d, x - inset - wob(y + 3))
-        if not mask & E:
-            d = min(d, (T - 1 - x) - inset - wob(y + 11))
-        return d
-
-    for y in range(T):
-        for x in range(T):
-            d = inside(x, y)
-            if d < 0:
-                continue
-            if d < 1.0:
-                px[x, y] = rim_dark
-            elif d < 2.0:
-                px[x, y] = rim
-            else:
-                r = rng.random()
-                px[x, y] = inner_dark if r < speckle else (inner_light if r > 1 - speckle * 0.6 else inner)
-    return img
 
 
 def _edge_textured(mask: int, seed: int, inner: Image.Image, fringe: tuple, shade: tuple,
@@ -189,75 +123,6 @@ LEAF = {
     "stem": Material(color("stone", 3), color("stone", 4), color("dusk", 6), color("dusk", 6)),
     "dot": Material(color("dusk", 6), color("dusk", 6), color("dusk", 6), color("dusk", 6)),
 }
-
-
-def tree() -> Image.Image:
-    rng = random.Random(7)
-    rig = Rig(64, 96)
-    rig.capsule("trunk", 1, 32, 94, 32, 60, 5.5, 4.0)
-    rig.capsule("trunk", 1, 32, 70, 22, 56, 2.5, 1.5)
-    rig.capsule("trunk", 1, 33, 66, 43, 54, 2.5, 1.5)
-    rig.ellipse("trunk", 1, 32, 93, 8, 2.5)                   # Wurzelansatz
-    for cx, cy, rx, ry in ((32, 36, 26, 24), (18, 48, 12, 11), (46, 48, 13, 11), (32, 20, 18, 15),
-                           (20, 28, 11, 10), (44, 28, 12, 11), (32, 54, 16, 9)):
-        rig.ellipse("leaf", 2, cx, cy, rx, ry)
-    for _ in range(9):
-        cx, cy = rng.uniform(14, 46), rng.uniform(12, 44)
-        rig.ellipse("leaf_hi", 2, cx - 3, cy - 2, rng.uniform(3, 5), rng.uniform(2, 3.5))
-    return render(rig, LEAF)
-
-
-def bush() -> Image.Image:
-    rng = random.Random(11)
-    rig = Rig(32, 32)
-    for cx, cy, rx, ry in ((16, 20, 13, 10), (10, 16, 7, 7), (22, 15, 8, 7), (16, 12, 7, 6)):
-        rig.ellipse("leaf", 1, cx, cy, rx, ry)
-    for _ in range(5):
-        rig.ellipse("leaf_hi", 1, rng.uniform(8, 22), rng.uniform(9, 20), 2.5, 1.8)
-    for _ in range(4):
-        x, y = rng.randint(7, 24), rng.randint(12, 25)
-        rig.pixels("berry", 2, [(x, y)])
-    return render(rig, LEAF)
-
-
-def rock() -> Image.Image:
-    rig = Rig(32, 32)
-    rig.ellipse("stone", 1, 16, 21, 12, 8)
-    rig.ellipse("stone", 1, 13, 17, 7, 6)
-    rig.ellipse("moss", 2, 10, 14, 4, 2)
-    return render(rig, LEAF)
-
-
-def fairy_ring() -> Image.Image:
-    """Pilzkreis (64x32): Ort für den Größenwechsel im frühen Spiel."""
-    rig = Rig(64, 32)
-    rng = random.Random(5)
-    shrooms = []
-    for i in range(11):
-        a = i / 11 * 2 * math.pi + 0.2
-        x = 32 + math.cos(a) * 25 + rng.uniform(-1, 1)
-        y = 16 + math.sin(a) * 10 + rng.uniform(-0.5, 0.5)
-        shrooms.append((y, x, rng.uniform(0.8, 1.2)))
-    for y, x, s in sorted(shrooms):  # hintere zuerst
-        rig.capsule("stem", 1, x, y + 1, x, y + 4 * s, 1.0, 1.1)
-        rig.ellipse("cap", 2, x, y, 3.2 * s, 2.2 * s)
-        rig.pixels("dot", 3, [(int(x) - 1, int(y) - 1), (int(x) + 1, int(y))])
-    return render(rig, LEAF)
-
-
-def flowers() -> Image.Image:
-    img = Image.new("RGBA", (T, T), TRANSPARENT)
-    px = img.load()
-    rng = random.Random(3)
-    for _ in range(6):
-        x, y = rng.randint(4, 27), rng.randint(8, 27)
-        for dy in range(1, 4):
-            px[x, y + dy] = color("moss", 2)
-        petal = rng.choice([color("rose", 6), color("fae", 4), color("ember", 4), color("dusk", 6)])
-        for dx, dy in ((1, 0), (-1, 0), (0, -1), (0, 1)):
-            px[x + dx, y + dy] = petal
-        px[x, y] = color("ember", 3)
-    return img
 
 
 def shadow(w: int, h: int) -> Image.Image:
@@ -387,13 +252,6 @@ def _small_star() -> Image.Image:
     return img
 
 
-def _pad32(img: Image.Image) -> Image.Image:
-    """16x16-Deko auf 32x32 (Kachelraster), unten mittig."""
-    out = Image.new("RGBA", (T, T), TRANSPARENT)
-    out.alpha_composite(img, (8, 16))
-    return out
-
-
 def build() -> list[GeneratedAsset]:
     out: list[GeneratedAsset] = []
     tdir = ASSETS / "tilesets/mooswiesen"
@@ -411,14 +269,24 @@ def build() -> list[GeneratedAsset]:
         atlas.alpha_composite(_fence(m), (m * T, 3 * T))
     p = save_png(atlas, tdir / "meadow_tiles.png")
     out.append(GeneratedAsset(p, "tileset", GEN, "Gras(4), Weg/Wasser/Zaun je 16 Kantenmasken"))
-    for name, img, note in (("tree", M2.tree_textured(), "Laubbaum 64x96, Blattballen mit Struktur"),
-                            ("bush", M2._leaf_texture(bush().copy(), 5), "Busch 32x32"),
-                            ("rock", rock(), "Stein 32x32"), ("flowers", M2.flowers(), "Blumeninsel 32x32"),
-                            ("fairy_ring", fairy_ring(), "Feenring 64x32"),
-                            ("tall_grass", _pad32(M2.tall_grass(1)), "Hohes Gras (Deko)"),
-                            ("pebbles", _pad32(M2.pebble_cluster(2)), "Kiesel (Deko)")):
+    p = save_png(LT.atlas("spring"), tdir / "meadow_ground.png")
+    out.append(GeneratedAsset(p, "tileset", GEN, "Boden (Dual Grid): Gras/Weg/Wasser aus dem LPC-Geländeset von "
+                              "ElizaWy (vendor/eliza/Terrain), Originalfarben", license="OGA-BY-3.0",
+                              license_url="docs/licenses/OGA-BY-3.0.txt",
+                              author="Eliza Wyatt, Lanea Zimmerman (Sharm) u. a. (vendor/eliza/Terrain/Credits.txt)",
+                              modified=True))
+    lpc = dict(license="OGA-BY-3.0", license_url="docs/licenses/OGA-BY-3.0.txt", modified=True,
+               author="Eliza Wyatt, Lanea Zimmerman (Sharm), Hyptosis u. a. (vendor/eliza/Terrain/Credits.txt)")
+    for name, img, note in (("tree", LO.crop("tree"), "Laubbaum (LPC, ElizaWy)"),
+                            ("tree_blossom", LO.crop("tree_blossom"), "Blühender Baum (LPC, ElizaWy)"),
+                            ("bush", LO.crop("bush"), "Busch (LPC, ElizaWy)"),
+                            ("rock", LO.crop("rock"), "Stein (LPC, ElizaWy)"),
+                            ("flowers", LO.crop("flowers"), "Blumen (LPC, ElizaWy)"),
+                            ("fairy_ring", LO.fairy_ring(), "Feenring aus LPC-Pilzen (ElizaWy)"),
+                            ("tall_grass", LO.crop("tall_grass"), "Hohes Gras (LPC, ElizaWy)"),
+                            ("pebbles", LO.crop("pebbles"), "Kiesel (LPC, ElizaWy)")):
         p = save_png(img, tdir / f"{name}.png")
-        out.append(GeneratedAsset(p, "tileset", GEN, note))
+        out.append(GeneratedAsset(p, "tileset", GEN, note, **lpc))
     fdir = ASSETS / "sprites/fx"
     for name, img, note in (("shadow_small", shadow(16, 8), "Schatten Fee/Hund"),
                             ("shadow_medium", shadow(24, 8), "Schatten Klio"),

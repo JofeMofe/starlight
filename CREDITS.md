@@ -34,3 +34,17 @@ die Zuordnung Datei → Autor:innen → Quelle steht in `tools/pipeline/vendor/l
 Künstler:innen: JaidynReiman, Nila122, Benjamin K. Smith (BenCreating), bluecarrot16, TheraHedwig,
 Evert, MuffinElZangano, Durrani, Pierre Vigier (pvigier), ElizaWy, Matthew Krohn (makrohn),
 Johannes Sjölund (wulax), Stephen Challener (Redshrike), Joe White.
+
+### Pferd Holunder – [LPC] Horses
+
+`assets/sprites/animals/horses/holunder.png` basiert auf **[LPC] Horses** von **bluecarrot16**
+(OGA-BY 3.0 / CC-BY 3.0 / GPL; hier OGA-BY 3.0), https://opengameart.org/content/lpc-horses,
+bezogen über https://github.com/hckr/endless-horse-run; auf die Palette umgefärbt.
+Original: `tools/pipeline/vendor/lpc_horses/`.
+
+### Gelände und Welt-Objekte – ElizaWy/LPC
+
+Boden (Gras, Weg, Wasser mit Übergängen), Bäume, Büsche, Steine, Blumen, Gräser und die Pilze des
+Feenrings stammen aus [ElizaWy/LPC](https://github.com/ElizaWy/LPC) (Ordner `Terrain`, CC-BY 3.0 /
+OGA-BY 3.0; hier OGA-BY 3.0), Originalfarben. Künstler:innen: Eliza Wyatt (DeathsDarling),
+Lanea Zimmerman (Sharm), Hyptosis, Demetrius. Einzelnachweise: `tools/pipeline/vendor/eliza/Terrain/Credits.txt`.

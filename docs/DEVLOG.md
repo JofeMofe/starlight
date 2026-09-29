@@ -4,6 +4,41 @@ Neueste Sitzung oben. Pro Sitzung: was, warum, offene Punkte.
 
 ---
 
+## Sitzung 5 – 2026-09-29 · Professioneller Look: LPC-Welt und LPC-Pferd
+
+### Anlass und Entscheidung
+
+Nutzer: Auflösung bleibt, aber das Ergebnis muss professionell werden; alle gängigen Quellen
+nutzen, Lizenzen spielen keine Rolle, weil Starlight ein privates Geschenk ist. Festgehalten als
+Projektentscheidung in CLAUDE.md §9. Grenze, die ich selbst ziehe: keine aus kommerziellen Spielen
+herausgelösten Grafiken.
+
+### Was wurde gemacht
+
+- **Welt:** Boden aus dem LPC-Geländeset von ElizaWy (`vendor/eliza/Terrain`, Originalfarben).
+  Die Vorlagen sind eckbasiert; der MapBuilder legt deshalb eine um eine halbe Kachel versetzte
+  Bodenebene an („Dual Grid“, `_build_ground`), jede Kachel wählt sich über die vier Kartenzellen
+  an ihren Ecken. Ergebnis: runde Ufer mit Uferkante, natürliche Wegränder. Der Baker
+  (`sprites/lpc_terrain.py`) setzt die zwei fehlenden Diagonalfälle aus Vierteln zusammen.
+  Die Rasterebene darunter trägt weiter die Kollisionen.
+- **Objekte:** Laubbaum, blühender Baum (neu, `tree_blossom`), Busch, Stein, Blumen, hohes Gras,
+  Kiesel und die Pilze des Feenrings aus demselben Set (`sprites/lpc_objects.py`), auf ein
+  32er-Raster aufgefüllt, Fußpunkt unten.
+- **Pferd:** [LPC] Horses von bluecarrot16 (über GitHub bezogen), auf die Palette umgefärbt:
+  Stehen mit gelegentlichem Grasen, Schritt, Trab (Schritt schneller getaktet), Galopp in drei
+  Ansichten, Frames 128×128. Hufschlag-Sounds stehen jetzt als `hoof` in den Animationsdaten.
+  Sitzpunkte für Klio neu eingestellt.
+- Alte Zeichenfunktionen (Bäume, Büsche, Steine, Pferde-Rig) entfernt.
+
+### Offen
+
+- **Hund:** noch der Eigenbau und damit das einzige Element, das stilistisch herausfällt. Auf GitHub
+  gibt es im LPC-Stil nur einen Wolf mit Drohgebärden; die LPC-Hunde liegen auf opengameart.org,
+  das in dieser Umgebung gesperrt ist → Nutzer erneut um Freigabe gebeten.
+- Zaun und Feenring-Glitzer sind noch Eigenbau; Reiten nutzt die LPC-Sitzpose.
+
+---
+
 ## Sitzung 4 – 2026-09-29 · Klio aus frei lizenzierten Vorlagen (LPC)
 
 ### Anlass

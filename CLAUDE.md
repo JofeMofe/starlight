@@ -460,6 +460,8 @@ Für **jedes** Fremd-Asset in `docs/ASSET_MANIFEST.csv`: `pfad, typ, quelle_url,
 
 **Hinweis:** Da Fremd-Assets den einheitlichen Stil gefährden, verwende sie vor allem für Audio und Fonts, bei Grafik nur als Grundlage für starke Überarbeitung.
 
+> **Projektentscheidung vom 2026-09-29 (Nutzer, ersetzt die Einschränkungen oben):** Starlight ist ein privates Geschenk und wird nicht veröffentlicht. Frei herunterladbare Asset-Packs dürfen unabhängig von ihrer Lizenz verwendet werden (auch „nur privat/nicht kommerziell“), wenn sie zu einem professionellen Ergebnis führen; Grafik darf die Originalfarben der Vorlagen behalten (Ausnahmen in `tools/pipeline/palette_whitelist.txt`). Weiterhin nicht verwendet werden Grafiken, die aus kommerziellen Spielen herausgelöst wurden. Quelle und Lizenz jedes Fremd-Assets werden weiterhin in `CREDITS.md` und `docs/ASSET_MANIFEST.csv` dokumentiert. Vor einer Veröffentlichung müssten alle Assets erneut geprüft werden.
+
 ---
 
 ## 10. AUDIO

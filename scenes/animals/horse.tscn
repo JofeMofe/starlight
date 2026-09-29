@@ -40,9 +40,9 @@ texture = ExtResource("2_shadow")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("3_sheet")
-offset = Vector2(0, -29)
+offset = Vector2(0, -31)
 region_enabled = true
-region_rect = Rect2(0, 0, 96, 64)
+region_rect = Rect2(0, 0, 128, 128)
 
 [node name="Anim" type="Node" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("4_anim")

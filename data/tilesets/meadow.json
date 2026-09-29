@@ -2,6 +2,16 @@
   "_doc": "Kachelsatz Mooswiesen (M1-Platzhalter). Zeilen im Atlas; 'mask' = 16 Kantenvarianten (Index = Nachbarbits N1 O2 S4 W8). collision: Ebene aus PhysicsLayers; inset = Abstand der Kollision zum Rand an offenen Seiten (px).",
   "texture": "res://assets/tilesets/mooswiesen/meadow_tiles.png",
   "tile_size": 32,
+  "ground": {
+    "_doc": "Sichtbarer Boden als Dual Grid (LPC-Gelände, ElizaWy). Zeilen im Atlas: row = 16 Eckmasken (TL=8, TR=4, BL=2, BR=1), fill_row = Füllvarianten. Reihenfolge = Vorrang.",
+    "texture": "res://assets/tilesets/mooswiesen/meadow_ground.png",
+    "grass_row": 2,
+    "variants": 6,
+    "transitions": [
+      {"kind": "water", "row": 1, "fill_row": 4},
+      {"kind": "path", "row": 0, "fill_row": 3}
+    ]
+  },
   "terrains": {
     "grass": {
       "row": 0,
@@ -30,6 +40,7 @@
   },
   "objects": {
     "tree": "res://scenes/world/objects/tree.tscn",
+    "tree_blossom": "res://scenes/world/objects/tree_blossom.tscn",
     "bush": "res://scenes/world/objects/bush.tscn",
     "rock": "res://scenes/world/objects/rock.tscn",
     "flowers": "res://scenes/world/objects/flowers.tscn",

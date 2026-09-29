@@ -9,16 +9,17 @@ Format: **[Bereich] Beschreibung** – Auswirkung – geplante Lösung (Meilenst
   (Brille zurechtschieben, Haare hinters Ohr, Hüpfen), ohne Portraits und ohne Blinzeln; die Brille
   ist rundlich statt eckig. Reiten nutzt die LPC-Sitzpose (Beine nach vorn), nicht eine echte
   Reitpose. – LPC-Reitposen (opengameart.org, derzeit gesperrt) bzw. eigene Frames, M3/M6.
-- **[Netzwerk] opengameart.org, itch.io, kenney.nl gesperrt** (Umgebungsrichtlinie). Pferd und
-  Hund bleiben Eigenbauten, bis LPC-Pferde/-Hunde geladen werden können. – Nutzer um Freigabe gebeten.
+- **[Netzwerk] opengameart.org, itch.io, kenney.nl gesperrt** (Umgebungsrichtlinie). Der Hund
+  bleibt Eigenbau, bis LPC-Hunde geladen werden können. – Nutzer um Freigabe gebeten.
+- **[Grafik] Zaun** ist noch Eigenbau und passt stilistisch nicht ganz zur LPC-Welt. – LPC-Zaun
+  (ElizaWy `Structure/Fences`) einbauen.
 - **[Recht] Klio ist einer realen Person nachempfunden** (auf Wunsch des Nutzers, nur nach
   Beschreibung): vor einer öffentlichen Veröffentlichung Einverständnis der Person einholen (§5.1).
 - **[Grafik] Hund wirkt unbeholfen** (Nutzer-Feedback „derpy“). – Ersatz durch LPC-Hund, sobald
   opengameart.org erreichbar ist.
 - **[Grafik] Pferd und Hund nur 4 Richtungen** (8 empfohlen), Pferd ohne Idle-Varianten (Grasen,
   Wälzen …), Hund ohne Kratzen/Gähnen/Schmetterlinge. – M3.
-- **[Grafik] Teichufer eckig**: Kanten nur per 4er-Nachbarmaske, keine Innen-/Außenecken; Wasser
-  nicht animiert. – Echtes Autotiling mit Terrain-Sets in M2.
+- **[Grafik] Wasser nicht animiert** (Ufer sind seit Sitzung 5 rund, Dual Grid). – M2.
 - **[Audio] Hund- und Pferdelaute sind synthetisch und stilisiert** (Bellen, Schnauben); ich kann sie
   nicht selbst anhören. – Durch CC0-Aufnahmen oder bessere Synthese ersetzen (M3), Nutzer-Feedback erbeten.
 - **[Mechanik] Fee sinkt nicht automatisch über hohen Objekten ab** (§6.1): Bäume/Steine blockieren
